@@ -1,0 +1,88 @@
+"""Shared flood hazard classification from four EF5 exceedance-probability rasters.
+
+Port of `clasificar_peligro` from the UFFIS PBI Actividad 2 notebook. Each input
+raster holds P(flood depth >= threshold) for one depth, and each hazard level has
+a probability gate. A pixel takes the level of the DEEPEST threshold whose gate it
+clears, which falls out of assigning the levels in ascending order and letting
+later assignments win -- exactly as the notebook does it.
+
+Note on the inputs: the layer names below follow the notebook (7.62 / 10 / 30 /
+76 cm), but three of the source files are actually 15.24 / 30.48 / 60.96 cm
+(6/12/24 inch) thresholds. The naming was inherited from upstream; the ordering
+is correct either way, so the classification is unaffected.
+
+This module holds no plugin of its own. The hazard classification is surfaced
+as a map layer (`hazard_layer`) and as an exposure table (`impact_summary`);
+a heatmap of the classified grid used to live here too, but it duplicated the
+map layer's computation without adding anything the map does not show better.
+"""
+
+from functools import lru_cache
+
+import numpy as np
+import rasterio
+
+BUCKET = (
+    "https://cog-s3-test-401506828094-us-east-1-an.s3.us-east-1.amazonaws.com/"
+    "PBI_Actividad_2"
+)
+
+# The four rasters this classification is defined over. Fixed rather than
+# exposed as args: the gates are the only thing worth varying, and four URL
+# boxes in the editor invite mismatched or misordered grids.
+#
+# Note the depth labels come from the source filenames and are wrong -- three of
+# the four are 15.24/30.48/60.96 cm, not 7.62/10/30 cm. Kept as-is so the keys
+# still match the data everyone else refers to.
+PROB_URLS = {
+    "7p62": f"{BUCKET}/prob_7p62.tif",
+    "10cm": f"{BUCKET}/prob_10cm.tif",
+    "30cm": f"{BUCKET}/prob_30cm.tif",
+    "76cm": f"{BUCKET}/prob_76cm.tif",
+}
+
+# Level -> (class value, display label, colour). Ordered shallow to deep, which
+# is also the order the notebook assigns them in.
+# Value and colour only; the display name is per language, in strings.py.
+LEVELS = [
+    (1, "green"),
+    (2, "yellow"),
+    (3, "red"),
+    (4, "purple"),
+]
+NODATA = 255
+
+
+@lru_cache(maxsize=16)
+def _read_masked(url):
+    """First band of a raster as a masked array. Cached: the four inputs do not
+    change between requests, only the thresholds do."""
+    with rasterio.open(url) as ds:
+        return ds.read(1, masked=True)
+
+
+def clasificar_peligro(prob7p62, prob10cm, prob30cm, prob76cm, umbrales_peligro):
+    """Classify flood hazard from the four probability layers.
+
+    4 = Severo, 3 = Alto, 2 = Medio, 1 = Bajo, 0 = Normal, 255 = NoData.
+    """
+    # A pixel missing from any layer cannot be classified.
+    invalid = (
+        np.ma.getmaskarray(prob7p62)
+        | np.ma.getmaskarray(prob10cm)
+        | np.ma.getmaskarray(prob30cm)
+        | np.ma.getmaskarray(prob76cm)
+    )
+
+    peligro = np.zeros(prob7p62.shape, dtype=np.uint8)
+
+    # Ascending order: each assignment overwrites the last, so the deepest
+    # threshold that clears its gate is the one that sticks.
+    layers = (prob7p62, prob10cm, prob30cm, prob76cm)
+    # Gates arrive keyed by level value, not by name, so the classification is
+    # identical in both languages.
+    for layer, (value, _color) in zip(layers, LEVELS):
+        peligro[layer.filled(-np.inf) >= umbrales_peligro[value]] = value
+
+    peligro[invalid] = NODATA
+    return peligro

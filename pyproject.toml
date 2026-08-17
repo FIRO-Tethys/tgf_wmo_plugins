@@ -1,0 +1,39 @@
+[build-system]
+requires = ["setuptools>=64"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "tgf-wmo-plugins"
+version = "0.2.0"
+description = "TethysDash visualizations for the WMO Guatemala flood training, in English and Spanish"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { file = "LICENSE" }
+dependencies = [
+    "intake",
+    "numpy",
+    "pandas",
+    "rasterio",
+    "geopandas",
+    "shapely",
+    "zarr>=3.0",
+    "fsspec",
+    "aiohttp",
+]
+
+[project.entry-points."intake.drivers"]
+wmo_impact_summary_en = "tgf_wmo_plugins.impact_summary:ImpactSummaryEN"
+wmo_impact_summary_es = "tgf_wmo_plugins.impact_summary:ImpactSummaryES"
+wmo_hazard_layer_en = "tgf_wmo_plugins.hazard_layer:HazardLayerEN"
+wmo_hazard_layer_es = "tgf_wmo_plugins.hazard_layer:HazardLayerES"
+wmo_impact_layer_en = "tgf_wmo_plugins.impact_layer:ImpactLayerEN"
+wmo_impact_layer_es = "tgf_wmo_plugins.impact_layer:ImpactLayerES"
+wmo_storm_card_en = "tgf_wmo_plugins.storm_card:StormCardEN"
+wmo_storm_card_es = "tgf_wmo_plugins.storm_card:StormCardES"
+wmo_storm_impact_summary_en = "tgf_wmo_plugins.storm_impact_summary:StormImpactSummaryEN"
+wmo_storm_impact_summary_es = "tgf_wmo_plugins.storm_impact_summary:StormImpactSummaryES"
+wmo_storm_impact_layer_en = "tgf_wmo_plugins.storm_impact_layer:StormImpactLayerEN"
+wmo_storm_impact_layer_es = "tgf_wmo_plugins.storm_impact_layer:StormImpactLayerES"
+
+[tool.setuptools.packages.find]
+include = ["tgf_wmo_plugins*"]
