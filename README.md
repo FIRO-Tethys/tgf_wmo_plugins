@@ -39,6 +39,32 @@ distinction is worth keeping straight when building a dashboard:
 The two datasets sit on exactly the same grid — EPSG:3857, 424×319, 5 m cells,
 identical origin — so no reprojection or resampling happens anywhere.
 
+## Dashboards
+
+`dashboards/` holds the six ready-to-import dashboards for the training — three
+exercises, each in both languages:
+
+| file | dashboard |
+|---|---|
+| `Guatemala_Hands_On_1_English.json` | Guatemala Hands On 1 (English) |
+| `Guatemala_Hands_On_1_Espanol.json` | Guatemala Práctica 1 (Español) |
+| `Guatemala_Hands_On_2_English.json` | Guatemala Hands On 2 (English) |
+| `Guatemala_Hands_On_2_Espanol.json` | Guatemala Práctica 2 (Español) |
+| `Guatemala_Hands_On_3_English.json` | Guatemala Hands On 3 (English) |
+| `Guatemala_Hands_On_3_Espanol.json` | Guatemala Práctica 3 (Español) |
+
+Import them from the landing page once the plugins are installed and the server
+has restarted. Exercise 1 uses no plugins at all; exercise 2 uses the storm
+family; exercise 3 uses the hazard family.
+
+A dashboard is bound to the plugins of its own language, and not only through
+the `source` names. A variable input that draws its options from a plugin
+argument stores the string `"<group>: <label> - <Arg>"`, which embeds the
+plugin's translated group and label — so the English and Spanish copies of
+exercise 2 reference different option sources for the same Storm slider. Renaming
+a plugin's `label` or `group` breaks that binding silently; regenerate the
+dashboards rather than editing the strings by hand.
+
 ## Installing
 
 ```bash
