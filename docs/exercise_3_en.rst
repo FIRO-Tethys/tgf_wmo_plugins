@@ -245,6 +245,10 @@ build the map and the five rasters from scratch as in `Exercise 1 <exercise_1_en
    the 3-dot menu, hove over **Order**, and select **Send to Back**. The 
    selectors should now be visible on top of the map.
 
+#. Edit the map item. For each of the five rasters, edit the layer and turn off the 
+   **Default Visibility** in the **Layer** tab. This will hide the layers when the dashboard is first loaded.
+   Make sure to save the layer after editing it.
+
 #. Save the dashboard by clicking **Save Changes** in the top-right corner of
    the dashboard editor.
 
@@ -334,6 +338,8 @@ Step 7 — Finish the map
 #. Resize the map item to fill the window by dragging the handle in its
    bottom-right corner.
 
+#. Make sure to move the threshold input back into place.
+
 #. Save the dashboard by clicking **Save Changes** in the top-right corner of
    the dashboard editor.
 
@@ -372,20 +378,32 @@ Step 8 — Add the impact summary table
 #. Save the dashboard by clicking **Save Changes** in the top-right corner of
    the dashboard editor.
 
+.. figure:: images/ex3-impact-summary.png
+   :alt: The dashboard before and after lowering a threshold
+   :width: 100%
+
+   **Screenshot:** the impact summary table argsuments bound to the four threshold variables.
+
 
 Step 9 — Test the wiring
 ========================
 
-Leave edit mode and move a threshold. The hazard shading, the affected features
+Update a threshold. The hazard shading, the affected features
 and the table should all recompute together, with progress messages while the
-layers rebuild.
+layers rebuild. As a demonstration, lower the High threshold to 0.2. The purple Severe class
+expands to cover most of the stream, and the table shows more affected buildings and roads.
 
-.. figure:: images/ex3-thresholds-in-action.png
-   :alt: The dashboard before and after lowering a threshold
+.. figure:: images/ex3-thresholds-before.png
+   :alt: The dashboard before lowering a threshold
    :width: 100%
 
-   **Screenshot:** the same view before and after lowering the High threshold,
-   showing the classification expand.
+   **Screenshot:** the same view before lowering the Severe threshold,
+
+.. figure:: images/ex3-thresholds-after.png
+   :alt: The dashboard after lowering a threshold
+   :width: 100%
+
+   **Screenshot:** the same view after lowering the Severe threshold,
 
 
 Checkpoint
@@ -421,78 +439,3 @@ Talking points
   exact rather than an approximation. Normal and NoData are dropped — about 90%
   of the grid — because a basemap shows unaffected ground better than a coloured
   layer does.
-* **Where the probabilities came from.** These arrived already populated in the
-  partners' geopackage with no note on method. Notebook 3 recovers it by testing
-  four candidate samplings and lands on ``all_touched`` zonal maximum at about
-  98% agreement, with the residual pointing at a real open question about the
-  data. Worth raising as a lesson in verifying rather than assuming.
-
-
-Item positions
-==============
-
-The grid is 100 columns wide. Positions are ``x``, ``y`` (top-left) and ``w``,
-``h`` (size in grid units). Match approximately; these are for reference, not
-transcription.
-
-.. list-table::
-   :header-rows: 1
-   :widths: 46 14 14 13 13
-
-   * - Item
-     - x
-     - y
-     - w
-     - h
-   * - Map (**Fill Viewport**)
-     - 0
-     - 0
-     - 99
-     - 41
-   * - Variable Input — Base Map
-     - 0
-     - 0
-     - 17
-     - 6
-   * - Variable Input — Low Threshold
-     - 56
-     - 0
-     - 11
-     - 7
-   * - Variable Input — Medium Threshold
-     - 66
-     - 0
-     - 13
-     - 7
-   * - Variable Input — High Threshold
-     - 78
-     - 0
-     - 11
-     - 7
-   * - Variable Input — Severe Threshold
-     - 88
-     - 0
-     - 12
-     - 7
-   * - Flood Impact Summary (table)
-     - 56
-     - 7
-     - 44
-     - 21
-
-
-Notes on the shipped JSON
-=========================
-
-Two small discrepancies you may notice when comparing this guide against
-``dashboards/Guatemala_Hands_On_3_English.json``. Neither affects behaviour;
-both are recorded so they do not read as mistakes in your own work.
-
-* **The 30 cm probability layer has** ``rampMin`` **of** ``"00"`` **rather than**
-  ``"0"``. A typing artifact from the GUI. It parses to zero identically.
-* **The threshold inputs store two different defaults.** The active value,
-  ``initial_value``, is ``0.8`` on all four. The options metadata also carries an
-  ``initialValue`` of 0.3 / 0.2 / 0.1 / 0.15 — the notebook defaults — left over
-  from an earlier revision. The dashboard loads at 0.8. If you want the
-  notebook's classification on first load, set the initial value to the gates in
-  `Understanding the four thresholds`_ instead.
