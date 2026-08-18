@@ -7,11 +7,9 @@ Exercise 1 — A flood depth and probability map
 
 Building **Guatemala Hands On 1 (English)** step by step.
 
-.. admonition:: Start here
-
-   Read `Getting Started <getting_started_en.rst>`_ first. It covers installing
-   the plugins, the data bucket, and the motions this guide refers to — creating
-   a dashboard, entering edit mode, adding an item.
+**Start here** — Read `Getting Started <getting_started_en.rst>`_ first. It
+covers installing the plugins, the data bucket, and the motions this guide
+refers to — creating a dashboard, entering edit mode, adding an item.
 
 .. contents:: On this page
    :depth: 2
@@ -47,27 +45,33 @@ Step 1 — Create the dashboard
    * **Name**: ``Guatemala Hands On 1 (English)``
    * **Description**: ``Solution for WMO Guatemala Hands On Exercise #1``
 
-#. Enter edit mode, open **Dashboard Settings**, and turn on
+#. Find your dashboard in the landing page and double-click it to open. The dashboard is empty, so the preview shows a
+   blank canvas.
+
+#. Open **Dashboard Settings** in the top right corner, and turn on
    **Unrestricted Grid Item Movement**. Save the settings.
+
+#. Exit **Dashboard Settings** and click **Edit Dashboard** in the top right corner to enter edit mode.
 
 
 Step 2 — Add the map
 ====================
 
-#. Click **Add Dashboard Item**, then **Edit** on the new item.
+#. You will see an existing item on the dashboard. Click on the items 3 dot menu and select **Edit**.
+
 #. Set **Visualization Type** to **Map** (in the **Default** group).
+
 #. Five arguments appear: **Base Map**, **Layer Control**, **Layers**,
    **Map Extent** and **Map Drawing**. Leave them for now — you will fill them
    over the next steps.
-#. Tick **Layer Control**. This is what gives viewers the layer list, and with
-   five layers it is not optional.
+
+#. In the **Base Map** argument, choose ``World Light Gray Base`` for now. You will update this to be dynamic in a later step.
 
 .. figure:: images/ex1-map-args.png
    :alt: The Map visualization's arguments in the data viewer
    :width: 100%
 
-   **Screenshot:** the **Map** visualization's five arguments, with
-   **Layer Control** ticked.
+   **Screenshot:** the **Map** visualization's five arguments with a default base map selected.
 
 
 Step 3 — Add the depth layer
@@ -76,16 +80,19 @@ Step 3 — Add the depth layer
 #. Next to **Layers**, click **Add Layer**. The layer editor opens with tabs
    **Layer**, **Source**, **Style**, **Legend**, **Attributes/Table Popup** and
    **Custom Modal Popup**.
-#. On the **Layer** tab, set **Name** to ``Depth (m)``.
-#. Still on the **Layer** tab, open **Layer Properties** and add:
+#. On the **Layer** tab, set the following properties:
 
-   * ``opacity`` = ``.5``
+   .. list-table::
+      :header-rows: 1
+      :widths: 24 76
 
-   Layers draw in the order they appear in the list: the first one added sits
-   lowest, directly above the base map, and each later one paints over it. Depth
-   is added first, so it is the bottom data layer, and half opacity lets the
-   base map's imagery read through it — you can see *which* streets and
-   buildings the water is sitting on rather than just a coloured blob.
+      * - Field
+        - Value
+      * - ``name``
+        - ``Depth (m)``
+      * - ``opacity``
+        - ``.5``
+  
 #. On the **Source** tab, set **Source Type** to **GeoTIFF** and fill in:
 
    .. list-table::
@@ -102,20 +109,20 @@ Step 3 — Add the depth layer
    ``mask_below`` hides cells at or below the value given. Dry ground in this
    raster is 0, and without a mask the whole domain would be painted the
    ramp's low colour instead of showing the base map.
+
 #. On the **Style** tab, leave the mode on **Continuous** and pick the
    **YlGnBu** ramp. Leave **Min** and **Max** empty.
 
-   .. note::
+   Leaving both bounds empty is a deliberate choice, not laziness. An empty
+   bound means "resolve it from the file's statistics at render time", so the
+   ramp stretches across whatever range this particular raster holds — 0 to
+   about 4.76 m here. Set both and the raw values are styled directly
+   instead.
 
-      Leaving both bounds empty is a deliberate choice, not laziness. An empty
-      bound means "resolve it from the file's statistics at render time", so the
-      ramp stretches across whatever range this particular raster holds — 0 to
-      about 4.76 m here. Set both and the raw values are styled directly
-      instead.
-
-#. On the **Legend** tab, leave the legend on **default**. For a ramp-styled
+#. On the **Legend** tab, select **Default Legend**. For a ramp-styled
    raster the app generates a colour bar automatically.
-#. Save the layer.
+
+#. Save the layer by clicking "Create" at the bottom of the layer editor.
 
 .. figure:: images/ex1-layer-source-geotiff.png
    :alt: The Source tab configured for the depth GeoTIFF
@@ -146,15 +153,15 @@ stack and the shallowest — which covers the largest area — ends up on top:
    * - Layer **Name**
      - ``url``
    * - ``Flood Probability at 76 cm``
-     - ``.../PBI_Actividad_2/prob_76cm.tif``
+     - ``https://cog-s3-test-401506828094-us-east-1-an.s3.us-east-1.amazonaws.com/PBI_Actividad_2/prob_76cm.tif``
    * - ``Flood Probability at 30 cm``
-     - ``.../PBI_Actividad_2/prob_30cm.tif``
+     - ``https://cog-s3-test-401506828094-us-east-1-an.s3.us-east-1.amazonaws.com/PBI_Actividad_2/prob_30cm.tif``
    * - ``Flood Probability at 10 cm``
-     - ``.../PBI_Actividad_2/prob_10cm.tif``
+     - ``https://cog-s3-test-401506828094-us-east-1-an.s3.us-east-1.amazonaws.com/PBI_Actividad_2/prob_10cm.tif``
    * - ``Flood Probability at 7.6 cm``
-     - ``.../PBI_Actividad_2/prob_7p62.tif``
+     - ``https://cog-s3-test-401506828094-us-east-1-an.s3.us-east-1.amazonaws.com/PBI_Actividad_2/prob_7p62.tif``
 
-(``...`` is the bucket root from
+(More information about the data is in
 `The data <getting_started_en.rst#the-data>`_.)
 
 For **each** of the four:
@@ -166,14 +173,12 @@ For **each** of the four:
 #. **Style** tab: **Continuous**, ramp **turbo**, **Min** = ``0``,
    **Max** = ``1``.
 
-   .. important::
-
-      Pinning Min and Max to 0–1 is the whole point of these four layers.
-      Probability has a fixed, meaningful range, and all four layers must use the
-      same one or they cannot be compared. Left to auto-scale, each layer would
-      stretch its ramp over its own range and 0.2 would look like a different
-      severity on each — the shallow layer's mid-tone and the deep layer's
-      mid-tone would mean different numbers.
+   Pinning Min and Max to 0–1 is the whole point of these four layers.
+   Probability has a fixed, meaningful range, and all four layers must use the
+   same one or they cannot be compared. Left to auto-scale, each layer would
+   stretch its ramp over its own range and 0.2 would look like a different
+   severity on each — the shallow layer's mid-tone and the deep layer's
+   mid-tone would mean different numbers.
 
 #. **Legend** tab: leave as **default**.
 #. Save the layer.
@@ -195,10 +200,8 @@ Step 5 — Add the base map selector
 The base map is a variable input so the viewer can switch it without editing
 anything. Build the input first, then point the map at it.
 
-.. note::
-
-   Exercises 2 and 3 both reuse this item as-is. If you are working through them
-   in order, this is the step they refer back to.
+**Note** — Exercises 2 and 3 both reuse this item as-is. If you are working
+through them in order, this is the step they refer back to.
 
 #. **Add Dashboard Item** → **Edit**.
 #. **Visualization Type** → **Variable Input**.

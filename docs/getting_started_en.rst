@@ -63,11 +63,9 @@ Conventions
 * Every exercise ends with a **Checkpoint** listing what you should be able to
   see, and **Talking points** worth raising if you are teaching from it.
 
-.. note::
-
-   Screenshots in these guides are placeholders. Each ``figure`` block names what
-   the image should show; drop a PNG at the given path under ``docs/images/`` and
-   it will render.
+**Note** — Screenshots in these guides are placeholders. Each ``figure`` block
+names what the image should show; drop a PNG at the given path under
+``docs/images/`` and it will render.
 
 
 Before you begin
@@ -95,13 +93,11 @@ What you need
 #. **Visualization permissions**, if your instance restricts plugin types. The
    exercises use the ``table``, ``card`` and ``map_layer`` types.
 
-.. warning::
-
-   If the **Flood Maps (English)** group is missing from the dropdown, the
-   package is not installed in the environment the app is actually running in.
-   That is by far the most common setup problem. Installing into your shell's
-   Python is not enough when the app runs under a different interpreter or
-   container.
+**Warning** — If the **Flood Maps (English)** group is missing from the
+dropdown, the package is not installed in the environment the app is actually
+running in. That is by far the most common setup problem. Installing into your
+shell's Python is not enough when the app runs under a different interpreter or
+container.
 
 The data
 --------
@@ -131,14 +127,12 @@ Three prefixes matter:
    * - ``floodmaps_test/``
      - The 198-member ensemble Zarr store used by exercise 2.
 
-.. important::
-
-   The rasters the dashboards point at are the **EPSG:3857** copies under
-   ``PBI_Actividad_2/``, not the UTM originals under ``Guatemala_IBF/``. This is
-   not cosmetic. TethysDash ships no proj4, so OpenLayers can only resolve
-   EPSG:4326 and EPSG:3857 for layer data. Point a layer at a UTM raster and it
-   will appear to load and then vanish, or drag the whole map into UTM. If a
-   layer flashes on and disappears, check its projection first.
+**Important** — The rasters the dashboards point at are the **EPSG:3857** copies
+under ``PBI_Actividad_2/``, not the UTM originals under ``Guatemala_IBF/``. This
+is not cosmetic. TethysDash ships no proj4, so OpenLayers can only resolve
+EPSG:4326 and EPSG:3857 for layer data. Point a layer at a UTM raster and it
+will appear to load and then vanish, or drag the whole map into UTM. If a layer
+flashes on and disappears, check its projection first.
 
 
 Groundwork common to all three exercises
@@ -201,10 +195,8 @@ A dashboard can only be changed by its owner, and only in edit mode. Click the
    **Screenshot:** the header toolbar in edit mode, with the buttons above
    visible.
 
-.. tip::
-
-   Save often. **Cancel** reverts to the last save, so a long unsaved editing
-   session is a single mistake away from being lost.
+**Tip** — Save often. **Cancel** reverts to the last save, so a long unsaved
+editing session is a single mistake away from being lost.
 
 Adding and configuring a dashboard item
 ---------------------------------------

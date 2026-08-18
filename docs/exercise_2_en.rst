@@ -7,11 +7,9 @@ Exercise 2 — Impact for a single storm
 
 Building **Guatemala Hands On 2 (English)** step by step.
 
-.. admonition:: Start here
-
-   Read `Getting Started <getting_started_en.rst>`_ first. It covers installing
-   the plugins, the data bucket, and the motions this guide refers to — creating
-   a dashboard, entering edit mode, adding an item.
+**Start here** — Read `Getting Started <getting_started_en.rst>`_ first. It
+covers installing the plugins, the data bucket, and the motions this guide
+refers to — creating a dashboard, entering edit mode, adding an item.
 
 .. contents:: On this page
    :depth: 2
@@ -37,12 +35,10 @@ New ideas here: reading a slice out of a Zarr store, a vector layer whose
 features are produced by a plugin rather than fetched from a URL, and one
 variable input driving four separate things at once.
 
-.. tip::
-
-   ``notebooks/02_storm_impact.ipynb`` derives the numbers this dashboard shows
-   as plain Python — how depth is sampled onto each building and road, and how
-   the summary table is assembled. Worth running first if you want to understand
-   the analysis before assembling the interface.
+**Tip** — ``notebooks/02_storm_impact.ipynb`` derives the numbers this dashboard
+shows as plain Python — how depth is sampled onto each building and road, and
+how the summary table is assembled. Worth running first if you want to
+understand the analysis before assembling the interface.
 
 
 Step 1 — Create the dashboard
@@ -82,16 +78,14 @@ be wired up until the variable exists.
       * - ``initial_value``
         - ``2``
 
-   .. note::
-
-      That options source is not something you type. It is generated from an
-      existing plugin argument, in the form
-      ``<group>: <plugin label> - <Argument>``. Picking it means "offer the same
-      choices the Storm Impact Summary plugin's ``index`` argument offers", so
-      the dropdown is populated from the plugin and cannot drift out of sync with
-      it. The plugin supplies 198 entries, each labelled with the storm's
-      magnitude in millimetres rather than its index, because a magnitude is
-      something a forecaster can reason about and an index is not.
+   That options source is not something you type. It is generated from an
+   existing plugin argument, in the form
+   ``<group>: <plugin label> - <Argument>``. Picking it means "offer the same
+   choices the Storm Impact Summary plugin's ``index`` argument offers", so
+   the dropdown is populated from the plugin and cannot drift out of sync with
+   it. The plugin supplies 198 entries, each labelled with the storm's
+   magnitude in millimetres rather than its index, because a magnitude is
+   something a forecaster can reason about and an index is not.
 
 #. On the **Settings** tab set **Background Color** ``#ffffff``, and a border on
    the right side only.
@@ -136,12 +130,10 @@ Step 3 — Add the map with the Zarr depth layer
 
 #. Save the layer.
 
-.. important::
-
-   The ``index`` field is where this exercise becomes interactive. The Zarr store
-   holds all 198 storms in one array, and ``index`` selects the slice. Binding it
-   to ``${Storm}`` means changing the dropdown re-reads a different slice — no
-   duplicated layers, no separate files.
+**Important** — The ``index`` field is where this exercise becomes interactive.
+The Zarr store holds all 198 storms in one array, and ``index`` selects the
+slice. Binding it to ``${Storm}`` means changing the dropdown re-reads a
+different slice — no duplicated layers, no separate files.
 
 .. figure:: images/ex2-zarr-source.png
    :alt: The Source tab configured for the Zarr store
@@ -165,16 +157,14 @@ result.
 #. The plugin's arguments appear. Set ``index`` to ``${Storm}``.
 #. Click **Fetch plugin defaults**.
 
-   .. note::
-
-      This is the step that saves the most work. The plugin's ``run()`` returns a
-      ready-made scaffold — the layer name, the source binding, a rule-based
-      style keyed on the ``banda`` (depth band) attribute, and a matching legend.
-      After fetching you should see the layer named
-      **Flooded buildings and roads**, eight style rules, and a four-item
-      **Depth** legend, none of which you had to author. Authoring vector style
-      rules by hand is error-prone: a rule in the wrong shape silently never
-      matches and leaves every feature grey.
+   This is the step that saves the most work. The plugin's ``run()`` returns a
+   ready-made scaffold — the layer name, the source binding, a rule-based
+   style keyed on the ``banda`` (depth band) attribute, and a matching legend.
+   After fetching you should see the layer named
+   **Flooded buildings and roads**, eight style rules, and a four-item
+   **Depth** legend, none of which you had to author. Authoring vector style
+   rules by hand is error-prone: a rule in the wrong shape silently never
+   matches and leaves every feature grey.
 
 #. Check the **Style** and **Legend** tabs to see what arrived. Colours run green
    → yellow → red → purple across four depth bands, with separate rules for

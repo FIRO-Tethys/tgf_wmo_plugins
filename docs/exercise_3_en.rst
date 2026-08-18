@@ -7,14 +7,12 @@ Exercise 3 — Hazard classification with adjustable thresholds
 
 Building **Guatemala Hands On 3 (English)** step by step.
 
-.. admonition:: Start here
+**Start here** — Read `Getting Started <getting_started_en.rst>`_ first. It
+covers installing the plugins, the data bucket, and the motions this guide
+refers to — creating a dashboard, entering edit mode, adding an item.
 
-   Read `Getting Started <getting_started_en.rst>`_ first. It covers installing
-   the plugins, the data bucket, and the motions this guide refers to — creating
-   a dashboard, entering edit mode, adding an item.
-
-   This exercise reuses the five raster layers from
-   `Exercise 1 <exercise_1_en.rst>`_. Building that one first will save you time.
+This exercise reuses the five raster layers from `Exercise 1
+<exercise_1_en.rst>`_. Building that one first will save you time.
 
 .. contents:: On this page
    :depth: 2
@@ -41,12 +39,10 @@ classification, the affected features and the table all recompute.
 This is the most interactive of the three, and the one where what the interface
 *implies* deserves the most scrutiny.
 
-.. tip::
-
-   ``notebooks/03_hazard_classification.ipynb`` derives this classification as
-   plain Python, including the gate sweep that shows what each threshold controls.
-   Worth running first if you want to understand the analysis before assembling
-   the interface.
+**Tip** — ``notebooks/03_hazard_classification.ipynb`` derives this
+classification as plain Python, including the gate sweep that shows what each
+threshold controls. Worth running first if you want to understand the analysis
+before assembling the interface.
 
 
 Understanding the four thresholds
@@ -82,21 +78,19 @@ probability gate:
 
 A cell takes the level of the **deepest** threshold whose gate it clears.
 
-.. warning::
+**Warning** — Two things to know before you present this, both covered at length
+in ``notebooks/03_hazard_classification.ipynb``:
 
-   Two things to know before you present this, both covered at length in
-   ``notebooks/03_hazard_classification.ipynb``:
+**The 76 cm raster contains only the values 0 and 0.2.** At most 2 of 10
+ensemble members ever reached that depth anywhere in the domain. So any Severe
+gate above 0.2 makes the Severe class *unreachable* — the colour simply never
+appears, and a viewer moving that slider gets no feedback distinguishing
+"nothing qualifies" from "the control is broken".
 
-   **The 76 cm raster contains only the values 0 and 0.2.** At most 2 of 10
-   ensemble members ever reached that depth anywhere in the domain. So any
-   Severe gate above 0.2 makes the Severe class *unreachable* — the colour simply
-   never appears, and a viewer moving that slider gets no feedback distinguishing
-   "nothing qualifies" from "the control is broken".
-
-   **Three of the four depth labels are wrong upstream.** The files say
-   7.62 / 10 / 30 / 76 cm; three are actually 15.24 / 30.48 / 60.96 cm (6, 12
-   and 24 inches). The ordering is right, so the classification is unaffected,
-   but do not quote the centimetre figures as verified.
+**Three of the four depth labels are wrong upstream.** The files say 7.62 / 10 /
+30 / 76 cm; three are actually 15.24 / 30.48 / 60.96 cm (6, 12 and 24 inches).
+The ordering is right, so the classification is unaffected, but do not quote the
+centimetre figures as verified.
 
 
 Step 1 — Create the dashboard and the base map input
@@ -163,12 +157,11 @@ For each one:
    read as one strip.
 #. Save, and place them side by side across the top of the map area.
 
-.. note::
-
-   The variable names carry their meaning — ``Low Threshold (P(≥7.6 cm))`` rather
-   than ``umbral_bajo``. The name is what the viewer reads above the input, so it
-   has to say which probability is being gated. It is also the key other items
-   reference, so choose it before wiring anything and avoid renaming later.
+**Note** — The variable names carry their meaning — ``Low Threshold (P(≥7.6
+cm))`` rather than ``umbral_bajo``. The name is what the viewer reads above the
+input, so it has to say which probability is being gated. It is also the key
+other items reference, so choose it before wiring anything and avoid renaming
+later.
 
 .. figure:: images/ex3-threshold-inputs.png
    :alt: The four threshold variable inputs across the top of the dashboard
@@ -217,12 +210,10 @@ Step 4 — Add the hazard classification layer
    attribute, and given a four-item **Hazard** legend.
 #. Save the layer.
 
-.. note::
-
-   The argument names are Spanish (``umbral_bajo`` = "low threshold") because the
-   plugins were ported from the original UFFIS notebook and the internal names
-   were kept so the two can be read side by side. Only the labels were
-   translated. This is worth mentioning if attendees notice the mismatch.
+**Note** — The argument names are Spanish (``umbral_bajo`` = "low threshold")
+because the plugins were ported from the original UFFIS notebook and the
+internal names were kept so the two can be read side by side. Only the labels
+were translated. This is worth mentioning if attendees notice the mismatch.
 
 .. figure:: images/ex3-hazard-layer-source.png
    :alt: The hazard layer source configuration with four bound thresholds
@@ -255,13 +246,11 @@ Step 6 — Finish the map
 #. **Settings** tab: turn on **Fill Viewport**.
 #. Save.
 
-.. important::
-
-   The rasters must be the ``PBI_Actividad_2`` EPSG:3857 copies. If any layer
-   points at a ``Guatemala_IBF`` UTM original, the map will auto-fit to that
-   raster's projection, jump somewhere far from Guatemala, and the vector layers
-   will appear to load and then vanish. This exact bug cost real debugging time
-   on this dashboard.
+**Important** — The rasters must be the ``PBI_Actividad_2`` EPSG:3857 copies. If
+any layer points at a ``Guatemala_IBF`` UTM original, the map will auto-fit to
+that raster's projection, jump somewhere far from Guatemala, and the vector
+layers will appear to load and then vanish. This exact bug cost real debugging
+time on this dashboard.
 
 
 Step 7 — Add the impact summary table
