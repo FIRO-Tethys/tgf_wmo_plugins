@@ -45,33 +45,37 @@ Step 1 — Create the dashboard
    * **Name**: ``Guatemala Hands On 1 (English)``
    * **Description**: ``Solution for WMO Guatemala Hands On Exercise #1``
 
-#. Find your dashboard in the landing page and double-click it to open. The dashboard is empty, so the preview shows a
-   blank canvas.
+#. Find your dashboard on the landing page and double-click it to open. The
+   dashboard is empty, so the preview shows a blank canvas.
 
-#. Open **Dashboard Settings** in the top right corner, and turn on
+#. Open **Dashboard Settings** in the top-right corner, and turn on
    **Unrestricted Grid Item Movement**. Save the settings.
 
-#. Exit **Dashboard Settings** and click **Edit Dashboard** in the top right corner to enter edit mode.
+#. Exit **Dashboard Settings** and click **Edit Dashboard** in the top-right
+   corner to enter edit mode.
 
 
 Step 2 — Add the map
 ====================
 
-#. You will see an existing item on the dashboard. Click on the item's 3 dot menu and select **Edit**.
+#. You will see an existing item on the dashboard. Click on the item's 3-dot
+   menu and select **Edit**.
 
-#. Set **Visualization Type** to **Map** (in the **Default** group).
+#. Set the **Visualization Type** to **Map** (in the **Default** group).
 
 #. Five arguments appear: **Base Map**, **Layer Control**, **Layers**,
    **Map Extent** and **Map Drawing**. Leave them for now — you will fill them
    over the next steps.
 
-#. In the **Base Map** argument, choose ``World Light Gray Base`` for now. You will update this to be dynamic in a later step.
+#. In the **Base Map** argument, choose ``World Light Gray Base`` for now. You
+   will update this to be dynamic in a later step.
 
 .. figure:: images/ex1-map-args.png
    :alt: The Map visualization's arguments in the data viewer
    :width: 100%
 
-   **Screenshot:** the **Map** visualization's five arguments with a default base map selected.
+   **Screenshot:** the **Map** visualization's five arguments, with a default
+   base map selected.
 
 
 Step 3 — Add the depth layer
@@ -93,7 +97,7 @@ Step 3 — Add the depth layer
         - ``Depth (m)``
       * - ``opacity``
         - ``.5``
-  
+
 #. On the **Source** tab, set **Source Type** to **GeoTIFF** and fill in:
 
    .. list-table::
@@ -176,8 +180,8 @@ For **each** of the four:
       * - Field
         - Value
       * - ``name``
-        - ``See the table above for the name``
-  
+        - *see the table above*
+
 #. On the **Source** tab, set **Source Type** to **GeoTIFF** and fill in:
 
    .. list-table::
@@ -187,11 +191,11 @@ For **each** of the four:
       * - Field
         - Value
       * - ``url``
-        - ``See the table above for the URL``
+        - *see the table above*
       * - ``mask_below``
         - ``0``
 
-   Zero means "no chance of flooding here"
+   Zero means "no chance of flooding here".
 
 #. On the **Style** tab, leave the mode on **Continuous** and pick the
    **turbo** ramp. Set **Min** = ``0`` and **Max** = ``1``.
@@ -203,8 +207,9 @@ For **each** of the four:
    severity on each — the shallow layer's mid-tone and the deep layer's
    mid-tone would mean different numbers.
 
-#. If setting up the first layer, on the **Legend** tab, select **Default Legend**. For a ramp-styled
-   raster the app generates a colour bar automatically.
+#. If setting up the first layer, on the **Legend** tab, select **Default
+   Legend**. For a ramp-styled raster the app generates a colour bar
+   automatically.
 
    Only the first probability layer needs its legend enabled; the four share a
    scale, so four identical colour bars would just take up room. In the shipped
@@ -212,11 +217,14 @@ For **each** of the four:
 
 #. Save the layer by clicking **Create** at the bottom of the layer editor.
 
-#. Save the map item by clicking **Save** in the bottom-right corner of the map editor.
+#. Save the map item by clicking **Save** in the bottom-right corner of the map
+   editor.
 
-#. Drag the map item by the handle in the bottom-right corner of the map to resize it to fill the window.
+#. Resize the map item to fill the window by dragging the handle in its
+   bottom-right corner.
 
-#. Save the dashboard by clicking **Save** in the top-right corner of the dashboard editor.
+#. Save the dashboard by clicking **Save Changes** in the top-right corner of
+   the dashboard editor.
 
 .. figure:: images/ex1-layer-list.png
    :alt: The Layers list showing all five raster layers
@@ -234,13 +242,15 @@ anything. Build the input first, then point the map at it.
 **Note** — Exercises 2 and 3 both reuse this item as-is. If you are working
 through them in order, this is the step they refer back to.
 
-#. Set the dashboard in edit mode by clicking on the **Edit Dashboard** buttom in the top-right corner.
+#. Set the dashboard in edit mode by clicking on the **Edit Dashboard** button
+   in the top-right corner.
 
 #. Add another item by clicking **Add Dashboard Item** in the top-right corner.
 
-#. Click on the 3 dot menu of the new item and select **Edit**.
+#. Click on the 3-dot menu of the new item and select **Edit**.
 
-#. Set the **Visualization Type** to **Variable Input** (in the **Default** group).
+#. Set the **Visualization Type** to **Variable Input** (in the **Default**
+   group).
 
 #. Fill in:
 
@@ -260,19 +270,23 @@ through them in order, this is the step they refer back to.
    ``Base Map Layers`` is a built-in options source — it fills the dropdown with
    the base maps the instance offers, so you do not enumerate them yourself.
 
-#. On the **Settings** tab set **Background Color** to ``#ffffff``. Without it
+#. On the **Settings** tab, set **Background Color** to ``#ffffff``. Without it
    the dropdown floats on the map with no backing and is hard to read.
 
-#. Select an initial value for the dropdown from the preview on the right side of the editor. The shipped solution uses ``World Light Gray Base`` but any
+#. Select an initial value for the dropdown from the preview on the right side
+   of the editor. The shipped solution uses ``World Light Gray Base``, but any
    base map is fine.
 
-#. Save the item by clicking **Save** in the bottom-right corner of the item editor
+#. Save the item by clicking **Save** in the bottom-right corner of the item
+   editor.
 
 #. Drag the item to the top-left corner over the map and resize it as needed.
 
-#. Save the dashboard by clicking **Save** in the top-right corner of the dashboard editor.
+#. Save the dashboard by clicking **Save Changes** in the top-right corner of
+   the dashboard editor.
 
-   You now have a base map selector on the dashboard, but it does not yet control the map.
+   You now have a base map selector on the dashboard, but it does not yet
+   control the map.
 
 .. figure:: images/ex1-variable-input-basemap.png
    :alt: The base map variable input configuration
@@ -281,21 +295,23 @@ through them in order, this is the step they refer back to.
    **Screenshot:** the **Variable Input** arguments for the base map selector.
 
 
-Step 6 — Updating the map's base map, extent and viewport
-=========================================================
+Step 6 — Update the map's base map, extent and viewport
+=======================================================
 
-#. Set the dashboard in edit mode by clicking on the **Edit Dashboard** buttom in the top-right corner.
+#. Set the dashboard in edit mode by clicking on the **Edit Dashboard** button
+   in the top-right corner.
 
-#. Click on the 3 dot menu of the map item and select **Edit**.
+#. Click on the 3-dot menu of the map item and select **Edit**.
 
-#. In the **Base Map** argument, choose ``Base Map`` from the **Variable Inputs**
-   section at the bottom of the dropdown. The value becomes ``${Base Map}``.
+#. In the **Base Map** argument, choose ``Base Map`` from the **Variable
+   Inputs** section at the bottom of the dropdown. The value becomes ``${Base
+   Map}``.
 
-   See
-   `Referencing a variable input <getting_started_en.rst#referencing-a-variable-input>`_
-   for the two forms this reference can take.
+   See `Referencing a variable input
+   <getting_started_en.rst#referencing-a-variable-input>`_ for the two forms
+   this reference can take.
 
-#. In **Map Extent** argument, choose **Use a Custom Extent** and enter:
+#. In the **Map Extent** argument, choose **Use a Custom Extent** and enter:
 
    .. code-block:: text
 
@@ -306,9 +322,11 @@ Step 6 — Updating the map's base map, extent and viewport
 #. On the **Settings** tab, turn on **Fill Viewport** so the map occupies the
    whole window.
 
-#. Save the item by clicking **Save** in the bottom-right corner of the map editor.
+#. Save the item by clicking **Save** in the bottom-right corner of the map
+   editor.
 
-#. Save the dashboard by clicking **Save Changes** in the top-right corner of the dashboard editor.
+#. Save the dashboard by clicking **Save Changes** in the top-right corner of
+   the dashboard editor.
 
 .. figure:: images/ex1-settings-fill-viewport.png
    :alt: The Settings tab with Fill Viewport enabled
@@ -323,7 +341,8 @@ Checkpoint
 You should now have:
 
 * A map filling the window, showing Guatemala City.
-* A layer control listing six layers (including the base map); toggling each changes what is drawn.
+* A layer control listing six layers (including the base map); toggling each
+  changes what is drawn.
 * A legend control with a colour bar for depth, and one for probability.
 * A base-map dropdown top-left that changes the imagery underneath.
 * Depth visible through to the probability layers beneath it, thanks to the
@@ -355,5 +374,6 @@ Talking points
 Next
 ====
 
-`Exercise 2 — Impact for a single storm <exercise_2_en.rst>`_ adds a plugin-backed
-vector layer and a data-driven selector to what you have just built.
+`Exercise 2 — Impact for a single storm <exercise_2_en.rst>`_ adds a
+plugin-backed vector layer and a data-driven selector to what you have just
+built.

@@ -183,7 +183,7 @@ A dashboard can only be changed by its owner, and only in edit mode. Click the
    * - **Dashboard Settings**
      - Name, description, thumbnail, sharing, notes, and
        **Unrestricted Grid Item Movement**.
-   * - **Save**
+   * - **Save Changes**
      - Persists the layout.
    * - **Cancel**
      - Discards changes back to the last save.
@@ -202,7 +202,7 @@ Adding and configuring a dashboard item
 ---------------------------------------
 
 #. In edit mode, click **Add Dashboard Item**. An empty item appears.
-#. Click the **three-dot menu** on the item and choose **Edit**. The data viewer
+#. Click the item's **3-dot menu** and select **Edit**. The data viewer
    modal opens.
 #. On the **Visualization** tab, pick a **Visualization Type**. Arguments for
    that visualization appear underneath.
@@ -210,7 +210,8 @@ Adding and configuring a dashboard item
 #. Switch to the **Settings** tab for item-level options — borders, background,
    **Fill Viewport**. Settings only become available once a visualization is
    configured and previewing.
-#. Click **Save** in the data viewer to apply, then **Save** in the header to
+#. Click **Save** in the bottom-right corner of the item editor to apply,
+   then **Save Changes** in the top-right corner of the dashboard editor to
    persist.
 
 .. figure:: images/00-dataviewer.png
@@ -221,10 +222,10 @@ Adding and configuring a dashboard item
    showing the **Flood Maps (English)** group.
 
 .. figure:: images/00-griditem-menu.png
-   :alt: A dashboard item's three-dot menu open
+   :alt: A dashboard item's 3-dot menu open
    :width: 100%
 
-   **Screenshot:** an item's three-dot menu, showing Edit, Create Copy, Export
+   **Screenshot:** an item's 3-dot menu, showing Edit, Create Copy, Export
    and Delete.
 
 Sizing and placing items
@@ -273,7 +274,7 @@ The Spanish dashboards use the ``_es`` plugins throughout, so a dashboard is
 internally consistent in one language — do not mix them.
 
 These files are whole-dashboard exports. Individual items can also be moved
-between dashboards through **Export** on an item's three-dot menu and
+between dashboards through **Export** on an item's 3-dot menu and
 **Import Dashboard Item** in the header, which is the quickest way to reuse
 exercise 1's five raster layers in exercise 3.
 

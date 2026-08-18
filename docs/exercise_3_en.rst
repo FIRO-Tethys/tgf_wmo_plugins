@@ -9,10 +9,9 @@ Building **Guatemala Hands On 3 (English)** step by step.
 
 **Start here** — Read `Getting Started <getting_started_en.rst>`_ first. It
 covers installing the plugins, the data bucket, and the motions this guide
-refers to — creating a dashboard, entering edit mode, adding an item.
-
-This exercise reuses the five raster layers from `Exercise 1
-<exercise_1_en.rst>`_. Building that one first will save you time.
+refers to — creating a dashboard, entering edit mode, adding an item. This
+exercise also reuses the five raster layers from
+`Exercise 1 <exercise_1_en.rst>`_, so building that one first will save you time.
 
 .. contents:: On this page
    :depth: 2
@@ -87,28 +86,49 @@ gate above 0.2 makes the Severe class *unreachable* — the colour simply never
 appears, and a viewer moving that slider gets no feedback distinguishing
 "nothing qualifies" from "the control is broken".
 
-**Three of the four depth labels are wrong upstream.** The files say 7.62 / 10 /
-30 / 76 cm; three are actually 15.24 / 30.48 / 60.96 cm (6, 12 and 24 inches).
-The ordering is right, so the classification is unaffected, but do not quote the
-centimetre figures as verified.
+**Three of the four depth labels are wrong upstream.** The files say
+7.62 / 10 / 30 / 76 cm; three are actually 15.24 / 30.48 / 60.96 cm (6, 12 and
+24 inches). The ordering is right, so the classification is unaffected, but do
+not quote the centimetre figures as verified.
 
 
-Step 1 — Create the dashboard and the base map input
-====================================================
+Step 1 — Create the dashboard
+=============================
 
-Create a new dashboard (see
-`Creating a dashboard <getting_started_en.rst#creating-a-dashboard>`_) with:
+#. Create a new dashboard (see
+   `Creating a dashboard <getting_started_en.rst#creating-a-dashboard>`_) with:
 
-* **Name**: ``Guatemala Hands On 3 (English)``
-* **Description**: ``Solution for WMO Guatemala Hands On Exercise #3``
+   * **Name**: ``Guatemala Hands On 3 (English)``
+   * **Description**: ``Solution for WMO Guatemala Hands On Exercise #3``
 
-Turn on **Unrestricted Grid Item Movement**, then add a **Base Map** variable
-input as in
-`Exercise 1, step 5 <exercise_1_en.rst#step-5-add-the-base-map-selector>`_. Give
-it a border on all four sides and a white background.
+#. Find your dashboard on the landing page and double-click it to open. The
+   dashboard is empty, so the preview shows a blank canvas.
+
+#. Open **Dashboard Settings** in the top-right corner, and turn on
+   **Unrestricted Grid Item Movement**. Save the settings.
+
+#. Exit **Dashboard Settings** and click **Edit Dashboard** in the top-right
+   corner to enter edit mode.
 
 
-Step 2 — Add the four threshold inputs
+Step 2 — Add the base map selector
+==================================
+
+#. You will see an existing item on the dashboard. Click on the item's 3-dot
+   menu and select **Edit**.
+
+#. Configure it as a base map selector exactly as in
+   `Exercise 1, step 5 <exercise_1_en.rst#step-5-add-the-base-map-selector>`_:
+   ``variable_name`` of ``Base Map``, ``show_label`` of ``True``, and
+   ``variable_options_source`` of ``Base Map Layers``.
+
+#. On the **Settings** tab, set **Background Color** to ``#ffffff`` and add a
+   border on all four sides.
+
+#. Save the item, drag it to the top-left corner, and save the dashboard.
+
+
+Step 3 — Add the four threshold inputs
 ======================================
 
 Build all four before the layers that consume them. Each is a **Variable Input**
@@ -122,7 +142,7 @@ with ``variable_options_source`` set to ``number``:
      - min
      - max
      - step
-     - ``initial_value``
+     - initial value
    * - ``Low Threshold (P(≥7.6 cm))``
      - 0
      - 1
@@ -144,24 +164,57 @@ with ``variable_options_source`` set to ``number``:
      - 0.05
      - 0.8
 
-For each one:
+For **each** of the four:
 
-#. **Add Dashboard Item** → **Edit** → **Visualization Type**
-   **Variable Input**.
-#. Set ``variable_name`` from the table. Tick ``show_label``.
-#. Set ``variable_options_source`` to ``number``, then fill the metadata:
-   **Minimum** ``0``, **Maximum** ``1``, **Step** ``0.05``.
-#. Set ``initial_value`` to ``0.8``.
-#. **Settings** tab: **Background Color** ``#ffffff``, and a top border. Give the
-   leftmost input a left border and the rightmost a right border, so the four
-   read as one strip.
-#. Save, and place them side by side across the top of the map area.
+#. Set the dashboard in edit mode by clicking on the **Edit Dashboard** button
+   in the top-right corner.
 
-**Note** — The variable names carry their meaning — ``Low Threshold (P(≥7.6
-cm))`` rather than ``umbral_bajo``. The name is what the viewer reads above the
-input, so it has to say which probability is being gated. It is also the key
-other items reference, so choose it before wiring anything and avoid renaming
-later.
+#. Add another item by clicking **Add Dashboard Item** in the top-right corner.
+
+#. Click on the 3-dot menu of the new item and select **Edit**.
+
+#. Set the **Visualization Type** to **Variable Input** (in the **Default**
+   group).
+
+#. Fill in:
+
+   .. list-table::
+      :header-rows: 1
+      :widths: 32 68
+
+      * - Argument
+        - Value
+      * - ``variable_name``
+        - *see the table above*
+      * - ``show_label``
+        - ``True``
+      * - ``variable_options_source``
+        - ``number``
+
+#. Fill in the options metadata that appears: **Minimum** ``0``, **Maximum**
+   ``1``, **Step** ``0.05``.
+
+   The variable names carry their meaning — ``Low Threshold (P(≥7.6 cm))``
+   rather than ``umbral_bajo``. The name is what the viewer reads above the
+   input, so it has to say which probability is being gated. It is also the key
+   other items reference, so choose it before wiring anything and avoid renaming
+   later.
+
+#. On the **Settings** tab, set **Background Color** to ``#ffffff`` and add a
+   top border. Give the leftmost input a left border and the rightmost a right
+   border, so the four read as one strip.
+
+#. Set the initial value to ``0.8`` in the preview on the right side of the
+   editor.
+
+#. Save the item by clicking **Save** in the bottom-right corner of the item
+   editor.
+
+#. Drag the item into place along the top of the dashboard, to the right of the
+   base map selector, and resize it as needed.
+
+#. Save the dashboard by clicking **Save Changes** in the top-right corner of
+   the dashboard editor.
 
 .. figure:: images/ex3-threshold-inputs.png
    :alt: The four threshold variable inputs across the top of the dashboard
@@ -171,24 +224,43 @@ later.
    label and value.
 
 
-Step 3 — Add the map and the five rasters
+Step 4 — Add the map and the five rasters
 =========================================
 
-Add a **Map** item and build the same five raster layers as
-`Exercise 1 <exercise_1_en.rst>`_ — same names, URLs, ramps and bounds. Set
-**Base Map** to ``${Base Map}`` and tick **Layer Control**.
+#. Set the dashboard in edit mode by clicking on the **Edit Dashboard** button
+   in the top-right corner.
 
-The quickest route, if you still have exercise 1: open its map item's three-dot
-menu, choose **Export**, then use **Import Dashboard Item** here and edit the
-imported copy. That carries all five layers over intact.
+#. Add another item by clicking **Add Dashboard Item** in the top-right corner.
+
+#. Click on the 3-dot menu of the new item and select **Edit**.
+
+#. Set the **Visualization Type** to **Map** (in the **Default** group).
+
+#. In the **Base Map** argument, choose ``Base Map`` from the **Variable
+   Inputs** section at the bottom of the dropdown. The value becomes
+   ``${Base Map}``.
+
+#. Tick **Layer Control**. With seven layers it is not optional.
+
+#. Build the same five raster layers as
+   `Exercise 1 <exercise_1_en.rst>`_ — same names, URLs, ramps and bounds:
+   ``Depth (m)`` with the **YlGnBu** ramp and unpinned bounds, then the four
+   probability layers with the **turbo** ramp pinned to ``0``–``1``.
+
+   The quickest route, if you still have exercise 1: open its map item's 3-dot
+   menu, choose **Export**, then use **Import Dashboard Item** here and edit the
+   imported copy. That carries all five layers over intact.
 
 
-Step 4 — Add the hazard classification layer
+Step 5 — Add the hazard classification layer
 ============================================
 
-#. **Add Layer** on the map.
-#. **Source** tab: **Source Type** → **Flood Hazard Layer (English)**.
-#. Four arguments appear. Bind each to its variable:
+#. Next to **Layers**, click **Add Layer**.
+
+#. Go straight to the **Source** tab and set **Source Type** to **Flood Hazard
+   Layer (English)**.
+
+#. The plugin's arguments appear. Fill in:
 
    .. list-table::
       :header-rows: 1
@@ -205,15 +277,16 @@ Step 4 — Add the hazard classification layer
       * - ``umbral_severo``
         - ``${Severe Threshold (P(≥76 cm))}``
 
-#. Click **Fetch plugin defaults**. The layer is named
-   **Hazard classification**, styled with four rules on the ``peligro``
-   attribute, and given a four-item **Hazard** legend.
-#. Save the layer.
+   The argument names are Spanish (``umbral_bajo`` = "low threshold") because
+   the plugins were ported from the original UFFIS notebook and the internal
+   names were kept so the two can be read side by side. Only the labels were
+   translated. This is worth mentioning if attendees notice the mismatch.
 
-**Note** — The argument names are Spanish (``umbral_bajo`` = "low threshold")
-because the plugins were ported from the original UFFIS notebook and the
-internal names were kept so the two can be read side by side. Only the labels
-were translated. This is worth mentioning if attendees notice the mismatch.
+#. Click **Fetch plugin defaults**. The layer is named **Hazard
+   classification**, styled with four rules on the ``peligro`` attribute, and
+   given a four-item **Hazard** legend.
+
+#. Save the layer by clicking **Create** at the bottom of the layer editor.
 
 .. figure:: images/ex3-hazard-layer-source.png
    :alt: The hazard layer source configuration with four bound thresholds
@@ -223,28 +296,48 @@ were translated. This is worth mentioning if attendees notice the mismatch.
    to the four threshold variables.
 
 
-Step 5 — Add the affected-features layer
+Step 6 — Add the affected-features layer
 ========================================
 
-#. **Add Layer** again.
-#. **Source** tab: **Source Type** → **Flood Impact Layer (English)**.
-#. Bind the same four arguments to the same four variables as in step 4.
-#. **Fetch plugin defaults** → the layer arrives as
-   **Buildings and roads at risk** with eight rules (polygon and linestring per
-   level) and a **Hazard** legend.
-#. Save the layer.
+#. Next to **Layers**, click **Add Layer** again.
+
+#. Go straight to the **Source** tab and set **Source Type** to **Flood Impact
+   Layer (English)**.
+
+#. Bind the same four arguments to the same four variables as in the previous
+   step.
+
+#. Click **Fetch plugin defaults**. The layer arrives as **Buildings and roads
+   at risk** with eight rules (polygon and linestring per level) and a **Hazard**
+   legend.
+
+#. Save the layer by clicking **Create** at the bottom of the layer editor.
 
 The two layers answer different questions from the same thresholds: the hazard
 layer classifies *ground*, this one classifies *assets*. Keeping them separate
 lets a viewer turn off the ground shading and look only at what is affected.
 
 
-Step 6 — Finish the map
+Step 7 — Finish the map
 =======================
 
-#. **Map Extent**: **Use a Custom Extent**, ``-10077781.20,1629865.34,15.13``.
-#. **Settings** tab: turn on **Fill Viewport**.
-#. Save.
+#. In the **Map Extent** argument, choose **Use a Custom Extent** and enter:
+
+   .. code-block:: text
+
+      -10077781.20,1629865.34,15.13
+
+#. On the **Settings** tab, turn on **Fill Viewport** so the map occupies the
+   whole window.
+
+#. Save the item by clicking **Save** in the bottom-right corner of the map
+   editor.
+
+#. Resize the map item to fill the window by dragging the handle in its
+   bottom-right corner.
+
+#. Save the dashboard by clicking **Save Changes** in the top-right corner of
+   the dashboard editor.
 
 **Important** — The rasters must be the ``PBI_Actividad_2`` EPSG:3857 copies. If
 any layer points at a ``Guatemala_IBF`` UTM original, the map will auto-fit to
@@ -253,22 +346,41 @@ layers will appear to load and then vanish. This exact bug cost real debugging
 time on this dashboard.
 
 
-Step 7 — Add the impact summary table
+Step 8 — Add the impact summary table
 =====================================
 
-#. **Add Dashboard Item** → **Edit**.
-#. **Visualization Type** → **Flood Impact Summary (English)**.
-#. Bind the same four arguments to the same four variables.
-#. **Settings** tab: white background, borders on the left, right and bottom so
-   it joins the strip of threshold inputs above it.
-#. Save and place it directly below the threshold inputs on the right.
+#. Set the dashboard in edit mode by clicking on the **Edit Dashboard** button
+   in the top-right corner.
+
+#. Add another item by clicking **Add Dashboard Item** in the top-right corner.
+
+#. Click on the 3-dot menu of the new item and select **Edit**.
+
+#. Set the **Visualization Type** to **Flood Impact Summary (English)** (in the
+   **Flood Maps (English)** group).
+
+#. Bind the same four arguments to the same four variables as in step 5.
+
+#. On the **Settings** tab, set **Background Color** to ``#ffffff`` and add
+   borders on the left, right and bottom, so it joins the strip of threshold
+   inputs above it.
+
+#. Save the item by clicking **Save** in the bottom-right corner of the item
+   editor.
+
+#. Drag the item directly below the threshold inputs on the right and resize it
+   as needed.
+
+#. Save the dashboard by clicking **Save Changes** in the top-right corner of
+   the dashboard editor.
 
 
-Step 8 — Save and test
-======================
+Step 9 — Test the wiring
+========================
 
-Save, leave edit mode, and move a threshold. The hazard shading, the affected
-features and the table should all recompute together.
+Leave edit mode and move a threshold. The hazard shading, the affected features
+and the table should all recompute together, with progress messages while the
+layers rebuild.
 
 .. figure:: images/ex3-thresholds-in-action.png
    :alt: The dashboard before and after lowering a threshold
@@ -281,12 +393,15 @@ features and the table should all recompute together.
 Checkpoint
 ==========
 
-* A full-window map with seven layers in the layer control.
+You should now have:
+
+* A map filling the window, with eight layers in the layer control (including
+  the base map).
 * Four labelled threshold inputs across the top, each stepping by 0.05.
 * Moving any threshold updates the hazard layer, the impact layer and the table.
 * Raising the Severe threshold above 0.2 makes purple disappear entirely — and
   it should, for the reason in the warning above.
-* Progress messages appear while the layers recompute.
+* Progress messages while the layers recompute.
 
 
 Talking points
@@ -372,8 +487,8 @@ Notes on the shipped JSON
 =========================
 
 Two small discrepancies you may notice when comparing this guide against
-``dashboards/Guatemala_Hands_On_3_English.json``. Neither affects behaviour; both
-are recorded so they do not read as mistakes in your own work.
+``dashboards/Guatemala_Hands_On_3_English.json``. Neither affects behaviour;
+both are recorded so they do not read as mistakes in your own work.
 
 * **The 30 cm probability layer has** ``rampMin`` **of** ``"00"`` **rather than**
   ``"0"``. A typing artifact from the GUI. It parses to zero identically.
@@ -381,5 +496,5 @@ are recorded so they do not read as mistakes in your own work.
   ``initial_value``, is ``0.8`` on all four. The options metadata also carries an
   ``initialValue`` of 0.3 / 0.2 / 0.1 / 0.15 — the notebook defaults — left over
   from an earlier revision. The dashboard loads at 0.8. If you want the
-  notebook's classification on first load, set ``initial_value`` to the values in
+  notebook's classification on first load, set the initial value to the gates in
   `Understanding the four thresholds`_ instead.
