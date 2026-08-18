@@ -59,9 +59,6 @@ Step 1 — Create the dashboard
 Step 2 — Add the storm selector
 ===============================
 
-Build this before anything else. Four other items reference it, and they cannot
-be wired up until the variable exists.
-
 #. You will see an existing item on the dashboard. Click on the item's 3-dot
    menu and select **Edit**.
 
@@ -83,14 +80,11 @@ be wired up until the variable exists.
       * - ``variable_options_source``
         - ``Flood Maps (English): Storm Impact Summary (English) - Index``
 
-   That options source is not something you type. It is generated from an
-   existing plugin argument, in the form ``<group>: <plugin label> -
-   <Argument>``. Picking it means "offer the same choices the Storm Impact
-   Summary plugin's ``index`` argument offers", so the dropdown is populated
-   from the plugin and cannot drift out of sync with it. The plugin supplies 198
-   entries, each labelled with the storm's magnitude in millimetres rather than
-   its index, because a magnitude is something a forecaster can reason about and
-   an index is not.
+   That options source is generated from an existing plugin argument, in the 
+   form ``<group>: <plugin label> - <Argument>``. Picking it means 
+   "offer the same choices the Storm Impact Summary plugin's ``index`` argument 
+   offers", so the dropdown is populated from the plugin and cannot drift out of 
+   sync with it.
 
 #. On the **Settings** tab, set **Background Color** to ``#ffffff`` and add a
    border on the right side only.
@@ -119,12 +113,60 @@ be wired up until the variable exists.
 Step 3 — Add the base map selector
 ==================================
 
-Add a second **Variable Input** for the base map, exactly as in
-`Exercise 1, step 5 <exercise_1_en.rst#step-5-add-the-base-map-selector>`_:
-``variable_name`` of ``Base Map``, ``show_label`` of ``True``, and
-``variable_options_source`` of ``Base Map Layers``.
+The base map is a variable input so the viewer can switch it without editing
+anything. Build the input first, then point the map at it.
 
-Place it in the top-left corner, to the left of the storm selector.
+#. Set the dashboard in edit mode by clicking on the **Edit Dashboard** button
+   in the top-right corner.
+
+#. Add another item by clicking **Add Dashboard Item** in the top-right corner.
+
+#. Click on the 3-dot menu of the new item and select **Edit**.
+
+#. Set the **Visualization Type** to **Variable Input** (in the **Default**
+   group).
+
+#. Fill in:
+
+   .. list-table::
+      :header-rows: 1
+      :widths: 32 68
+
+      * - Argument
+        - Value
+      * - ``variable_name``
+        - ``Base Map``
+      * - ``show_label``
+        - ``True``
+      * - ``variable_options_source``
+        - ``Base Map Layers``
+
+   ``Base Map Layers`` is a built-in options source — it fills the dropdown with
+   the base maps the instance offers, so you do not enumerate them yourself.
+
+#. On the **Settings** tab, set **Background Color** to ``#ffffff``. Without it
+   the dropdown floats on the map with no backing and is hard to read.
+
+#. Select an initial value for the dropdown from the preview on the right side
+   of the editor. The shipped solution uses ``World Light Gray Base``, but any
+   base map is fine.
+
+#. Save the item by clicking **Save** in the bottom-right corner of the item
+   editor.
+
+#. Drag the item to the top-left corner over the map and resize it as needed.
+
+#. Save the dashboard by clicking **Save Changes** in the top-right corner of
+   the dashboard editor.
+
+   You now have a base map selector on the dashboard, but it does not yet
+   control the map.
+
+.. figure:: images/ex1-variable-input-basemap.png
+   :alt: The base map variable input configuration
+   :width: 100%
+
+   **Screenshot:** the **Variable Input** arguments for the base map selector.
 
 
 Step 4 — Add the map with the Zarr depth layer
@@ -143,8 +185,6 @@ Step 4 — Add the map with the Zarr depth layer
    Inputs** section at the bottom of the dropdown. The value becomes
    ``${Base Map}``.
 
-#. Tick **Layer Control** so viewers can toggle the two layers.
-
 #. Next to **Layers**, click **Add Layer**.
 
 #. On the **Layer** tab, set the following properties:
@@ -156,7 +196,7 @@ Step 4 — Add the map with the Zarr depth layer
       * - Field
         - Value
       * - ``name``
-        - ``Flood Depth``
+        - ``Flood Depth (m)``
 
 #. On the **Source** tab, set **Source Type** to **Zarr** and fill in:
 
@@ -178,7 +218,7 @@ Step 4 — Add the map with the Zarr depth layer
    Binding it to ``${Storm}`` means changing the dropdown re-reads a different
    slice — no duplicated layers, no separate files.
 
-#. On the **Style** tab, leave the mode on **Continuous** and pick the **turbo**
+#. On the **Style** tab, leave the mode on **Continuous** and pick the **blue single hue**
    ramp. Leave **Min** and **Max** empty.
 
 #. On the **Legend** tab, select **Default Legend**. For a ramp-styled raster
@@ -252,6 +292,10 @@ result.
 
 #. Resize the map item to fill the left half of the window by dragging the
    handle in its bottom-right corner.
+
+#. If the map is covering the storm selector and base map selector, click on 
+   the 3-dot menu, hove over **Order**, and select **Send to Back**. The 
+   selectors should now be visible on top of the map.
 
 #. Save the dashboard by clicking **Save Changes** in the top-right corner of
    the dashboard editor.
@@ -350,7 +394,7 @@ Step 7 — Add the storm card
 Step 8 — Test the wiring
 ========================
 
-Leave edit mode and change the storm dropdown. All four items should update: the
+Change the storm dropdown. All four items should update: the
 Zarr layer re-reads its slice, the impact layer re-runs, and the table and card
 re-fetch. Progress messages appear while the impact layer recomputes.
 
@@ -388,49 +432,6 @@ Talking points
   in the GUI — fails silently when a rule is malformed. Shipping the style from
   ``run()`` means the layer is correct the first time and stays correct if the
   bands change.
-
-
-Item positions
-==============
-
-The grid is 100 columns wide. Positions are ``x``, ``y`` (top-left) and ``w``,
-``h`` (size in grid units). Match approximately; these are for reference, not
-transcription.
-
-.. list-table::
-   :header-rows: 1
-   :widths: 46 14 14 13 13
-
-   * - Item
-     - x
-     - y
-     - w
-     - h
-   * - Map
-     - 0
-     - 0
-     - 55
-     - 38
-   * - Variable Input — Base Map
-     - 0
-     - 0
-     - 15
-     - 6
-   * - Variable Input — Storm
-     - 43
-     - 0
-     - 12
-     - 6
-   * - Storm Impact Summary (table)
-     - 55
-     - 2
-     - 45
-     - 26
-   * - Storm Summary (card)
-     - 55
-     - 25
-     - 45
-     - 12
 
 
 Next

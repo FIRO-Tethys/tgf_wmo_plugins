@@ -235,9 +235,6 @@ Step 5 — Add the base map selector
 The base map is a variable input so the viewer can switch it without editing
 anything. Build the input first, then point the map at it.
 
-**Note** — Exercises 2 and 3 both reuse this item as-is. If you are working
-through them in order, this is the step they refer back to.
-
 #. Set the dashboard in edit mode by clicking on the **Edit Dashboard** button
    in the top-right corner.
 
