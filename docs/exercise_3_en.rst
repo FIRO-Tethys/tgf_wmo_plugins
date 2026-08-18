@@ -32,9 +32,6 @@ classification, the affected features and the table all recompute.
    **Screenshot:** the finished dashboard — full-window map, four threshold
    inputs along the top, impact table on the right.
 
-This is the most interactive of the three, and the one where what the interface
-*implies* deserves the most scrutiny.
-
 **Tip** — ``notebooks/03_hazard_classification.ipynb`` derives this
 classification as plain Python, including the gate sweep that shows what each
 threshold controls. Worth running first if you want to understand the analysis
@@ -58,35 +55,30 @@ probability gate:
    * - Low
      - P(≥ 7.6 cm)
      - green
-     - 0.3
+     - 0.8
    * - Medium
      - P(≥ 10 cm)
      - yellow
-     - 0.2
+     - 0.8
    * - High
      - P(≥ 30 cm)
      - red
-     - 0.1
+     - 0.8
    * - Severe
      - P(≥ 76 cm)
      - purple
-     - 0.15
+     - 0.8
 
 A cell takes the level of the **deepest** threshold whose gate it clears.
 
 **Warning** — Two things to know before you present this, both covered at length
 in ``notebooks/03_hazard_classification.ipynb``:
 
-**The 76 cm raster contains only the values 0 and 0.2.** At most 2 of 10
+**The 76 cm raster contains only the values 0 and 0.2.** At most 20% of the
 ensemble members ever reached that depth anywhere in the domain. So any Severe
 gate above 0.2 makes the Severe class *unreachable* — the colour simply never
 appears, and a viewer moving that slider gets no feedback distinguishing
 "nothing qualifies" from "the control is broken".
-
-**Three of the four depth labels are wrong upstream.** The files say
-7.62 / 10 / 30 / 76 cm; three are actually 15.24 / 30.48 / 60.96 cm (6, 12 and
-24 inches). The ordering is right, so the classification is unaffected, but do
-not quote the centimetre figures as verified.
 
 
 Step 1 — Create the dashboard
@@ -111,18 +103,56 @@ Step 1 — Create the dashboard
 Step 2 — Add the base map selector
 ==================================
 
+The base map is a variable input so the viewer can switch it without editing
+anything. Build the input first, then point the map at it.
+
 #. You will see an existing item on the dashboard. Click on the item's 3-dot
    menu and select **Edit**.
 
-#. Configure it as a base map selector exactly as in
-   `Exercise 1, step 5 <exercise_1_en.rst#step-5-add-the-base-map-selector>`_:
-   ``variable_name`` of ``Base Map``, ``show_label`` of ``True``, and
-   ``variable_options_source`` of ``Base Map Layers``.
+#. Set the **Visualization Type** to **Variable Input** (in the **Default**
+   group).
 
-#. On the **Settings** tab, set **Background Color** to ``#ffffff`` and add a
-   border on all four sides.
+#. Fill in:
 
-#. Save the item, drag it to the top-left corner, and save the dashboard.
+   .. list-table::
+      :header-rows: 1
+      :widths: 32 68
+
+      * - Argument
+        - Value
+      * - ``variable_name``
+        - ``Base Map``
+      * - ``show_label``
+        - ``True``
+      * - ``variable_options_source``
+        - ``Base Map Layers``
+
+   ``Base Map Layers`` is a built-in options source — it fills the dropdown with
+   the base maps the instance offers, so you do not enumerate them yourself.
+
+#. On the **Settings** tab, set **Background Color** to ``#ffffff``. Without it
+   the dropdown floats on the map with no backing and is hard to read.
+
+#. Select an initial value for the dropdown from the preview on the right side
+   of the editor. The shipped solution uses ``World Light Gray Base``, but any
+   base map is fine.
+
+#. Save the item by clicking **Save** in the bottom-right corner of the item
+   editor.
+
+#. Drag the item to the top-left corner over the map and resize it as needed.
+
+#. Save the dashboard by clicking **Save Changes** in the top-right corner of
+   the dashboard editor.
+
+   You now have a base map selector on the dashboard, but it does not yet
+   control the map.
+
+.. figure:: images/ex1-variable-input-basemap.png
+   :alt: The base map variable input configuration
+   :width: 100%
+
+   **Screenshot:** the **Variable Input** arguments for the base map selector.
 
 
 Step 3 — Add the four threshold inputs
@@ -133,33 +163,13 @@ with ``variable_options_source`` set to ``number``:
 
 .. list-table::
    :header-rows: 1
-   :widths: 44 14 14 14 14
+   :widths: 100
 
-   * - ``variable_name``
-     - min
-     - max
-     - step
-     - initial value
+   * - ``Variable Name``
    * - ``Low Threshold (P(≥7.6 cm))``
-     - 0
-     - 1
-     - 0.05
-     - 0.8
    * - ``Medium Threshold (P(≥10 cm))``
-     - 0
-     - 1
-     - 0.05
-     - 0.8
    * - ``High Threshold (P(≥30 cm))``
-     - 0
-     - 1
-     - 0.05
-     - 0.8
    * - ``Severe Threshold (P(≥76 cm))``
-     - 0
-     - 1
-     - 0.05
-     - 0.8
 
 For **each** of the four:
 
@@ -188,18 +198,12 @@ For **each** of the four:
       * - ``variable_options_source``
         - ``number``
 
-#. Fill in the options metadata that appears: **Minimum** ``0``, **Maximum**
-   ``1``, **Step** ``0.05``.
+#. On the **Settings** tab, set **Background Color** to ``#ffffff`` 
 
-   The variable names carry their meaning — ``Low Threshold (P(≥7.6 cm))``
-   rather than ``umbral_bajo``. The name is what the viewer reads above the
-   input, so it has to say which probability is being gated. It is also the key
-   other items reference, so choose it before wiring anything and avoid renaming
-   later.
+#. On the **Settings** tab, add a top border by clicking the top border icon. A popup will appear. Change the style to ``solid`` to show the border. 
 
-#. On the **Settings** tab, set **Background Color** to ``#ffffff`` and add a
-   top border. Give the leftmost input a left border and the rightmost a right
-   border, so the four read as one strip.
+   Give the leftmost input (``Low Threshold``) a left border and the rightmost (``Severe Threshold``) a right
+   border as well, so the four read as one strip.
 
 #. Set the initial value to ``0.8`` in the preview on the right side of the
    editor.
@@ -223,34 +227,36 @@ For **each** of the four:
 
 Step 4 — Add the map and the five rasters
 =========================================
+If you have exercise 1 then do the following. If you do not have exercise 1, 
+build the map and the five rasters from scratch as in `Exercise 1 <exercise_1_en.rst>`_.: 
 
-#. Set the dashboard in edit mode by clicking on the **Edit Dashboard** button
-   in the top-right corner.
+#. Open the dashboard from exercise 1
 
-#. Add another item by clicking **Add Dashboard Item** in the top-right corner.
+#. Click on the map item's 3-dot menu, choose **Export**, 
 
-#. Click on the 3-dot menu of the new item and select **Edit**.
+#. Open the new dashbord for this exercise.
 
-#. Set the **Visualization Type** to **Map** (in the **Default** group).
+#. Click **Edit Dashboard** in the top-right corner to enter edit mode.
 
-#. In the **Base Map** argument, choose ``Base Map`` from the **Variable
-   Inputs** section at the bottom of the dropdown. The value becomes
-   ``${Base Map}``.
+#. Click the **Import Dashboard Item** in the top-right corner and import the
+   dashboard item from exercise 1. 
 
-#. Tick **Layer Control**. With seven layers it is not optional.
+#. If the map is covering the storm selector and base map selector, click on 
+   the 3-dot menu, hove over **Order**, and select **Send to Back**. The 
+   selectors should now be visible on top of the map.
 
-#. Build the same five raster layers as
-   `Exercise 1 <exercise_1_en.rst>`_ — same names, URLs, ramps and bounds:
-   ``Depth (m)`` with the **YlGnBu** ramp and unpinned bounds, then the four
-   probability layers with the **turbo** ramp pinned to ``0``–``1``.
-
-   The quickest route, if you still have exercise 1: open its map item's 3-dot
-   menu, choose **Export**, then use **Import Dashboard Item** here and edit the
-   imported copy. That carries all five layers over intact.
+#. Save the dashboard by clicking **Save Changes** in the top-right corner of
+   the dashboard editor.
 
 
 Step 5 — Add the hazard classification layer
 ============================================
+
+#. Set the dashboard in edit mode by clicking on the **Edit Dashboard** button
+   in the top-right corner.
+
+#. Click on the map item's 3-dot menu and select **Edit**. You may need to move
+   one of the threshold inputs out of the way to see the map menu.
 
 #. Next to **Layers**, click **Add Layer**.
 
@@ -265,19 +271,14 @@ Step 5 — Add the hazard classification layer
 
       * - Argument
         - Value
-      * - ``umbral_bajo``
+      * - ``Low Threshold``
         - ``${Low Threshold (P(≥7.6 cm))}``
-      * - ``umbral_medio``
+      * - ``Medium Threshold``
         - ``${Medium Threshold (P(≥10 cm))}``
-      * - ``umbral_alto``
+      * - ``High Threshold``
         - ``${High Threshold (P(≥30 cm))}``
-      * - ``umbral_severo``
+      * - ``Severe Threshold``
         - ``${Severe Threshold (P(≥76 cm))}``
-
-   The argument names are Spanish (``umbral_bajo`` = "low threshold") because
-   the plugins were ported from the original UFFIS notebook and the internal
-   names were kept so the two can be read side by side. Only the labels were
-   translated. This is worth mentioning if attendees notice the mismatch.
 
 #. Click **Fetch plugin defaults**. The layer is named **Hazard
    classification**, styled with four rules on the ``peligro`` attribute, and

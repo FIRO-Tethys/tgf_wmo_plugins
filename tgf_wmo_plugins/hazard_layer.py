@@ -21,26 +21,20 @@ from tgf_wmo_plugins.classification import (
     LEVELS,
     NODATA,
     PROB_URLS,
+    ThresholdGates,
     clasificar_peligro,
 )
-from tgf_wmo_plugins.impact_summary import DEFAULT_GATES
-from tgf_wmo_plugins.strings import STRINGS
+from tgf_wmo_plugins.strings import STRINGS, threshold_args
 
 # Vectorizing a heavily fragmented classification could produce a huge payload.
 # Warn loudly rather than silently shipping megabytes of geometry.
 POLYGON_WARN_LIMIT = 20000
 
 
-class BaseHazardLayer(TethysDashPlugin):
+class BaseHazardLayer(ThresholdGates, TethysDashPlugin):
     LANG = None
     type = "map_layer"
     dynamic_map_layer = True
-    args = {
-        "umbral_bajo": "number",
-        "umbral_medio": "number",
-        "umbral_alto": "number",
-        "umbral_severo": "number",
-    }
 
     def run(self):
         """Configure-time scaffold: source binding, style and legend."""
@@ -66,18 +60,13 @@ class BaseHazardLayer(TethysDashPlugin):
         """Runtime features: re-run on load and on variable-input change."""
         s = STRINGS[self.LANG]
         urls = [PROB_URLS[k] for k in ("7p62", "10cm", "30cm", "76cm")]
-        umbrales = {
-            1: self._gate("umbral_bajo", DEFAULT_GATES[1]),
-            2: self._gate("umbral_medio", DEFAULT_GATES[2]),
-            3: self._gate("umbral_alto", DEFAULT_GATES[3]),
-            4: self._gate("umbral_severo", DEFAULT_GATES[4]),
-        }
+        gates = self.gates()
 
         self.send_update(s["msg_reading"], percentage_complete=10)
         layers, transform, crs = self._read(urls)
 
         self.send_update(s["msg_classifying"], percentage_complete=50)
-        peligro = clasificar_peligro(*layers, umbrales)
+        peligro = clasificar_peligro(*layers, gates)
 
         self.send_update(s["msg_polygons"], percentage_complete=75)
         features = self._vectorize(s, peligro, transform)
@@ -88,12 +77,6 @@ class BaseHazardLayer(TethysDashPlugin):
             "features": features,
             "crs": {"type": "name", "properties": {"name": str(crs)}},
         }
-
-    def _gate(self, arg, default):
-        try:
-            return float(self.get_arg(arg, default))
-        except (TypeError, ValueError):
-            return default
 
     @staticmethod
     def _read(urls):
@@ -169,6 +152,7 @@ class BaseHazardLayer(TethysDashPlugin):
 
 class HazardLayerEN(BaseHazardLayer):
     LANG = "en"
+    args = threshold_args("en")
     name = "wmo_hazard_layer_en"
     label = f"{STRINGS['en']['hazard_layer_label']} ({STRINGS['en']['language']})"
     group = STRINGS["en"]["group"]
@@ -178,6 +162,7 @@ class HazardLayerEN(BaseHazardLayer):
 
 class HazardLayerES(BaseHazardLayer):
     LANG = "es"
+    args = threshold_args("es")
     name = "wmo_hazard_layer_es"
     label = f"{STRINGS['es']['hazard_layer_label']} ({STRINGS['es']['language']})"
     group = STRINGS["es"]["group"]

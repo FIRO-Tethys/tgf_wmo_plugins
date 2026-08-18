@@ -673,10 +673,10 @@
                     "pluginSource": {
                       "source": "wmo_hazard_layer_en",
                       "args": {
-                        "umbral_bajo": "${Low Threshold (P(≥7.6 cm))}",
-                        "umbral_medio": "${Medium Threshold (P(≥10 cm))}",
-                        "umbral_alto": "${High Threshold (P(≥30 cm))}",
-                        "umbral_severo": "${Severe Threshold (P(≥76 cm))}"
+                        "low_threshold": "${Low Threshold (P(≥7.6 cm))}",
+                        "medium_threshold": "${Medium Threshold (P(≥10 cm))}",
+                        "high_threshold": "${High Threshold (P(≥30 cm))}",
+                        "severe_threshold": "${Severe Threshold (P(≥76 cm))}"
                       }
                     },
                     "layerId": "d890e98f-88bd-45d1-88cf-0e05f4b1db9e"
@@ -781,10 +781,10 @@
                     "pluginSource": {
                       "source": "wmo_impact_layer_en",
                       "args": {
-                        "umbral_bajo": "${Low Threshold (P(≥7.6 cm))}",
-                        "umbral_medio": "${Medium Threshold (P(≥10 cm))}",
-                        "umbral_alto": "${High Threshold (P(≥30 cm))}",
-                        "umbral_severo": "${Severe Threshold (P(≥76 cm))}"
+                        "low_threshold": "${Low Threshold (P(≥7.6 cm))}",
+                        "medium_threshold": "${Medium Threshold (P(≥10 cm))}",
+                        "high_threshold": "${High Threshold (P(≥30 cm))}",
+                        "severe_threshold": "${Severe Threshold (P(≥76 cm))}"
                       }
                     },
                     "layerId": "5ad73654-ae47-4d70-8819-5757be54921a"
@@ -945,10 +945,10 @@
           "h": 21,
           "source": "wmo_impact_summary_en",
           "args_string": {
-            "umbral_bajo": "${Low Threshold (P(≥7.6 cm))}",
-            "umbral_medio": "${Medium Threshold (P(≥10 cm))}",
-            "umbral_alto": "${High Threshold (P(≥30 cm))}",
-            "umbral_severo": "${Severe Threshold (P(≥76 cm))}"
+            "low_threshold": "${Low Threshold (P(≥7.6 cm))}",
+            "medium_threshold": "${Medium Threshold (P(≥10 cm))}",
+            "high_threshold": "${High Threshold (P(≥30 cm))}",
+            "severe_threshold": "${Severe Threshold (P(≥76 cm))}"
           },
           "metadata_string": {
             "border": {

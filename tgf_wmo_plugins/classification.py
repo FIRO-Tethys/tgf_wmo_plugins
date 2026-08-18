@@ -22,6 +22,8 @@ from functools import lru_cache
 import numpy as np
 import rasterio
 
+from tgf_wmo_plugins.strings import THRESHOLD_ARGS
+
 BUCKET = (
     "https://cog-s3-test-401506828094-us-east-1-an.s3.us-east-1.amazonaws.com/"
     "PBI_Actividad_2"
@@ -51,6 +53,36 @@ LEVELS = [
     (4, "purple"),
 ]
 NODATA = 255
+
+# The notebook's defaults, one gate per hazard level, keyed by class value. Used
+# whenever a dashboard leaves a threshold unset.
+DEFAULT_GATES = {1: 0.3, 2: 0.2, 3: 0.1, 4: 0.15}
+
+
+class ThresholdGates:
+    """Reads the four probability gates from a plugin's own argument names.
+
+    The English and Spanish variants of a plugin take differently named
+    arguments (`low_threshold` vs `umbral_bajo`), so the names cannot be
+    hard-coded by the plugin that reads them -- they are looked up from
+    THRESHOLD_ARGS by the subclass's LANG. Mixed in by every plugin that gates
+    on probability, which is how those three stay in step with each other.
+    """
+
+    def gates(self):
+        """The four gates, keyed by hazard class value."""
+        names = THRESHOLD_ARGS[self.LANG]
+        return {
+            value: self._gate(names[value], DEFAULT_GATES[value])
+            for value in sorted(DEFAULT_GATES)
+        }
+
+    def _gate(self, arg, default):
+        """Gates arrive from the GUI as strings."""
+        try:
+            return float(self.get_arg(arg, default))
+        except (TypeError, ValueError):
+            return default
 
 
 @lru_cache(maxsize=16)

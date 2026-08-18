@@ -14,16 +14,13 @@ from functools import lru_cache
 import pandas as pd
 from tethysapp.tethysdash.plugin_helpers import TethysDashPlugin
 
-from tgf_wmo_plugins.classification import LEVELS
+from tgf_wmo_plugins.classification import LEVELS, ThresholdGates
 from tgf_wmo_plugins.common import (
     FEATURES_CSV_URL,
     PROB_FIELDS,
     TOTAL_POPULATION,
 )
-from tgf_wmo_plugins.strings import STRINGS
-
-# The notebook's defaults, one gate per hazard level, keyed by class value.
-DEFAULT_GATES = {1: 0.3, 2: 0.2, 3: 0.1, 4: 0.15}
+from tgf_wmo_plugins.strings import STRINGS, threshold_args
 
 
 @lru_cache(maxsize=4)
@@ -31,27 +28,16 @@ def _load(url):
     return pd.read_csv(url)
 
 
-class BaseImpactSummary(TethysDashPlugin):
+class BaseImpactSummary(ThresholdGates, TethysDashPlugin):
     """Language-independent computation; subclasses only choose the strings."""
 
     LANG = None
     type = "table"
-    args = {
-        "umbral_bajo": "number",
-        "umbral_medio": "number",
-        "umbral_alto": "number",
-        "umbral_severo": "number",
-    }
 
     def run(self):
         s = STRINGS[self.LANG]
         df = _load(FEATURES_CSV_URL).copy()
-        gates = {
-            1: self._gate("umbral_bajo", DEFAULT_GATES[1]),
-            2: self._gate("umbral_medio", DEFAULT_GATES[2]),
-            3: self._gate("umbral_alto", DEFAULT_GATES[3]),
-            4: self._gate("umbral_severo", DEFAULT_GATES[4]),
-        }
+        gates = self.gates()
 
         # Escalating assignment: the deepest threshold a feature clears wins,
         # exactly as clasificar_peligro does for pixels.
@@ -67,13 +53,6 @@ class BaseImpactSummary(TethysDashPlugin):
         ]
         rows.append(self._row(s, s["row_total_hazard"], df[df.peligro > 0]))
         return {"title": s["hazard_summary_title"], "data": rows}
-
-    def _gate(self, arg, default):
-        """Gates arrive from the GUI as strings."""
-        try:
-            return float(self.get_arg(arg, default))
-        except (TypeError, ValueError):
-            return default
 
     @staticmethod
     def _row(s, name, group):
@@ -92,6 +71,7 @@ class BaseImpactSummary(TethysDashPlugin):
 
 class ImpactSummaryEN(BaseImpactSummary):
     LANG = "en"
+    args = threshold_args("en")
     name = "wmo_impact_summary_en"
     label = f"{STRINGS['en']['hazard_summary_label']} ({STRINGS['en']['language']})"
     group = STRINGS["en"]["group"]
@@ -101,6 +81,7 @@ class ImpactSummaryEN(BaseImpactSummary):
 
 class ImpactSummaryES(BaseImpactSummary):
     LANG = "es"
+    args = threshold_args("es")
     name = "wmo_impact_summary_es"
     label = f"{STRINGS['es']['hazard_summary_label']} ({STRINGS['es']['language']})"
     group = STRINGS["es"]["group"]

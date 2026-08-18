@@ -20,10 +20,9 @@ from tethysapp.tethysdash.plugin_helpers import (
     TethysDashPlugin,
 )
 
-from tgf_wmo_plugins.classification import LEVELS
+from tgf_wmo_plugins.classification import LEVELS, ThresholdGates
 from tgf_wmo_plugins.common import FEATURES_URL, PROB_FIELDS
-from tgf_wmo_plugins.impact_summary import DEFAULT_GATES
-from tgf_wmo_plugins.strings import STRINGS
+from tgf_wmo_plugins.strings import STRINGS, threshold_args
 
 # The frontend does not bundle proj4, so OpenLayers only resolves EPSG:4326 and
 # EPSG:3857. Anything else -- the source data is UTM 15N -- would be read as raw
@@ -46,16 +45,10 @@ def _load(url):
     return gdf[~gdf.geometry.is_empty]
 
 
-class BaseImpactLayer(TethysDashPlugin):
+class BaseImpactLayer(ThresholdGates, TethysDashPlugin):
     LANG = None
     type = "map_layer"
     dynamic_map_layer = True
-    args = {
-        "umbral_bajo": "number",
-        "umbral_medio": "number",
-        "umbral_alto": "number",
-        "umbral_severo": "number",
-    }
 
     def run(self):
         s = STRINGS[self.LANG]
@@ -75,12 +68,7 @@ class BaseImpactLayer(TethysDashPlugin):
 
     def fetch_features(self):
         s = STRINGS[self.LANG]
-        gates = {
-            1: self._gate("umbral_bajo", DEFAULT_GATES[1]),
-            2: self._gate("umbral_medio", DEFAULT_GATES[2]),
-            3: self._gate("umbral_alto", DEFAULT_GATES[3]),
-            4: self._gate("umbral_severo", DEFAULT_GATES[4]),
-        }
+        gates = self.gates()
 
         self.send_update(s["msg_loading_features"], percentage_complete=20)
         gdf = _load(FEATURES_URL).copy()
@@ -100,12 +88,6 @@ class BaseImpactLayer(TethysDashPlugin):
         collection = json.loads(exposed[columns + ["geometry"]].to_json())
         collection["crs"] = {"type": "name", "properties": {"name": OUTPUT_CRS}}
         return collection
-
-    def _gate(self, arg, default):
-        try:
-            return float(self.get_arg(arg, default))
-        except (TypeError, ValueError):
-            return default
 
     @staticmethod
     def _style(s):
@@ -150,6 +132,7 @@ class BaseImpactLayer(TethysDashPlugin):
 
 class ImpactLayerEN(BaseImpactLayer):
     LANG = "en"
+    args = threshold_args("en")
     name = "wmo_impact_layer_en"
     label = f"{STRINGS['en']['impact_layer_label']} ({STRINGS['en']['language']})"
     group = STRINGS["en"]["group"]
@@ -159,6 +142,7 @@ class ImpactLayerEN(BaseImpactLayer):
 
 class ImpactLayerES(BaseImpactLayer):
     LANG = "es"
+    args = threshold_args("es")
     name = "wmo_impact_layer_es"
     label = f"{STRINGS['es']['impact_layer_label']} ({STRINGS['es']['language']})"
     group = STRINGS["es"]["group"]

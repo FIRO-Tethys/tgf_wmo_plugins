@@ -172,6 +172,34 @@ STRINGS = {
 }
 
 
+# Plugin argument names for the four probability gates, one per language.
+#
+# Each language variant exposes its arguments in its own language, so an English
+# dashboard reads `low_threshold` and a Spanish one `umbral_bajo`. Keyed by the
+# `peligro` class value, like `levels` and `bands` above, so the gates stay tied
+# to the classification rather than to a spelling -- renaming an argument can
+# never silently reorder them.
+THRESHOLD_ARGS = {
+    "en": {
+        1: "low_threshold",
+        2: "medium_threshold",
+        3: "high_threshold",
+        4: "severe_threshold",
+    },
+    "es": {
+        1: "umbral_bajo",
+        2: "umbral_medio",
+        3: "umbral_alto",
+        4: "umbral_severo",
+    },
+}
+
+
+def threshold_args(lang):
+    """The four gate arguments as a plugin `args` schema, in `lang`."""
+    return {name: "number" for name in THRESHOLD_ARGS[lang].values()}
+
+
 def check_parity():
     """Raise if the two dictionaries have drifted apart.
 
@@ -189,6 +217,21 @@ def check_parity():
     for key in ("levels", "bands"):
         if set(STRINGS["en"][key]) != set(STRINGS["es"][key]):
             raise ValueError(f"{key} class values differ between languages")
+
+    if set(THRESHOLD_ARGS) != set(LANGUAGES):
+        raise ValueError("THRESHOLD_ARGS does not cover every language")
+    values = [set(names) for names in THRESHOLD_ARGS.values()]
+    if any(v != set(STRINGS["en"]["levels"]) for v in values):
+        raise ValueError("THRESHOLD_ARGS class values differ from levels")
+    # A name shared between languages would make one dashboard silently valid
+    # against the other language's plugin.
+    en_names = set(THRESHOLD_ARGS["en"].values())
+    es_names = set(THRESHOLD_ARGS["es"].values())
+    if en_names & es_names:
+        raise ValueError(
+            f"argument names shared between languages: "
+            f"{sorted(en_names & es_names)}"
+        )
 
 
 check_parity()
