@@ -7,10 +7,6 @@ Exercise 2 — Impact for a single storm
 
 Building **Guatemala Hands On 2 (English)** step by step.
 
-**Start here** — Read `Getting Started <getting_started_en.rst>`_ first. It
-covers installing the plugins, the data bucket, and the motions this guide
-refers to — creating a dashboard, entering edit mode, adding an item.
-
 .. contents:: On this page
    :depth: 2
    :local:

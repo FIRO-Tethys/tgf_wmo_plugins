@@ -7,10 +7,7 @@ Exercise 3 — Hazard classification with adjustable thresholds
 
 Building **Guatemala Hands On 3 (English)** step by step.
 
-**Start here** — Read `Getting Started <getting_started_en.rst>`_ first. It
-covers installing the plugins, the data bucket, and the motions this guide
-refers to — creating a dashboard, entering edit mode, adding an item. This
-exercise also reuses the five raster layers from
+**Start here** — This exercise reuses the five raster layers from
 `Exercise 1 <exercise_1_en.rst>`_, so building that one first will save you time.
 
 .. contents:: On this page
