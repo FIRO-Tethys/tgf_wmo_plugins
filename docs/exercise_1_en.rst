@@ -57,7 +57,7 @@ Step 1 — Create the dashboard
 Step 2 — Add the map
 ====================
 
-#. You will see an existing item on the dashboard. Click on the items 3 dot menu and select **Edit**.
+#. You will see an existing item on the dashboard. Click on the item's 3 dot menu and select **Edit**.
 
 #. Set **Visualization Type** to **Map** (in the **Default** group).
 
@@ -80,6 +80,7 @@ Step 3 — Add the depth layer
 #. Next to **Layers**, click **Add Layer**. The layer editor opens with tabs
    **Layer**, **Source**, **Style**, **Legend**, **Attributes/Table Popup** and
    **Custom Modal Popup**.
+
 #. On the **Layer** tab, set the following properties:
 
    .. list-table::
@@ -122,7 +123,7 @@ Step 3 — Add the depth layer
 #. On the **Legend** tab, select **Default Legend**. For a ramp-styled
    raster the app generates a colour bar automatically.
 
-#. Save the layer by clicking "Create" at the bottom of the layer editor.
+#. Save the layer by clicking **Create** at the bottom of the layer editor.
 
 .. figure:: images/ex1-layer-source-geotiff.png
    :alt: The Source tab configured for the depth GeoTIFF
@@ -166,12 +167,34 @@ stack and the shallowest — which covers the largest area — ends up on top:
 
 For **each** of the four:
 
-#. **Add Layer**, and set **Name** from the table.
-#. **Source** tab: **Source Type** **GeoTIFF**, the ``url`` from the table, and
-   ``mask_below`` = ``0``. Zero means "no chance of flooding here", which is
-   information the base map already conveys better than a coloured patch.
-#. **Style** tab: **Continuous**, ramp **turbo**, **Min** = ``0``,
-   **Max** = ``1``.
+#. On the **Layer** tab, set the following properties:
+
+   .. list-table::
+      :header-rows: 1
+      :widths: 24 76
+
+      * - Field
+        - Value
+      * - ``name``
+        - ``See the table above for the name``
+  
+#. On the **Source** tab, set **Source Type** to **GeoTIFF** and fill in:
+
+   .. list-table::
+      :header-rows: 1
+      :widths: 24 76
+
+      * - Field
+        - Value
+      * - ``url``
+        - ``See the table above for the URL``
+      * - ``mask_below``
+        - ``0``
+
+   Zero means "no chance of flooding here"
+
+#. On the **Style** tab, leave the mode on **Continuous** and pick the
+   **turbo** ramp. Set **Min** = ``0`` and **Max** = ``1``.
 
    Pinning Min and Max to 0–1 is the whole point of these four layers.
    Probability has a fixed, meaningful range, and all four layers must use the
@@ -180,12 +203,20 @@ For **each** of the four:
    severity on each — the shallow layer's mid-tone and the deep layer's
    mid-tone would mean different numbers.
 
-#. **Legend** tab: leave as **default**.
-#. Save the layer.
+#. If setting up the first layer, on the **Legend** tab, select **Default Legend**. For a ramp-styled
+   raster the app generates a colour bar automatically.
 
-Only the first probability layer needs its legend enabled; the four share a
-scale, so four identical colour bars would just take up room. In the shipped
-solution the 76 cm layer carries the legend and the other three have none.
+   Only the first probability layer needs its legend enabled; the four share a
+   scale, so four identical colour bars would just take up room. In the shipped
+   solution the 76 cm layer carries the legend and the other three have none.
+
+#. Save the layer by clicking **Create** at the bottom of the layer editor.
+
+#. Save the map item by clicking **Save** in the bottom-right corner of the map editor.
+
+#. Drag the map item by the handle in the bottom-right corner of the map to resize it to fill the window.
+
+#. Save the dashboard by clicking **Save** in the top-right corner of the dashboard editor.
 
 .. figure:: images/ex1-layer-list.png
    :alt: The Layers list showing all five raster layers
@@ -203,8 +234,14 @@ anything. Build the input first, then point the map at it.
 **Note** — Exercises 2 and 3 both reuse this item as-is. If you are working
 through them in order, this is the step they refer back to.
 
-#. **Add Dashboard Item** → **Edit**.
-#. **Visualization Type** → **Variable Input**.
+#. Set the dashboard in edit mode by clicking on the **Edit Dashboard** buttom in the top-right corner.
+
+#. Add another item by clicking **Add Dashboard Item** in the top-right corner.
+
+#. Click on the 3 dot menu of the new item and select **Edit**.
+
+#. Set the **Visualization Type** to **Variable Input** (in the **Default** group).
+
 #. Fill in:
 
    .. list-table::
@@ -216,17 +253,26 @@ through them in order, this is the step they refer back to.
       * - ``variable_name``
         - ``Base Map``
       * - ``show_label``
-        - ticked
+        - ``True``
       * - ``variable_options_source``
         - ``Base Map Layers``
-      * - ``initial_value``
-        - ``https://server.arcgisonline.com/arcgis/rest/services/World_Imagery/MapServer``
 
    ``Base Map Layers`` is a built-in options source — it fills the dropdown with
    the base maps the instance offers, so you do not enumerate them yourself.
+
 #. On the **Settings** tab set **Background Color** to ``#ffffff``. Without it
    the dropdown floats on the map with no backing and is hard to read.
-#. Save, and drag the item to the top-left corner over the map.
+
+#. Select an initial value for the dropdown from the preview on the right side of the editor. The shipped solution uses ``World Light Gray Base`` but any
+   base map is fine.
+
+#. Save the item by clicking **Save** in the bottom-right corner of the item editor
+
+#. Drag the item to the top-left corner over the map and resize it as needed.
+
+#. Save the dashboard by clicking **Save** in the top-right corner of the dashboard editor.
+
+   You now have a base map selector on the dashboard, but it does not yet control the map.
 
 .. figure:: images/ex1-variable-input-basemap.png
    :alt: The base map variable input configuration
@@ -235,35 +281,34 @@ through them in order, this is the step they refer back to.
    **Screenshot:** the **Variable Input** arguments for the base map selector.
 
 
-Step 6 — Point the map at the variable
-======================================
+Step 6 — Updating the map's base map, extent and viewport
+=========================================================
 
-#. Open the map item's **Edit** again.
+#. Set the dashboard in edit mode by clicking on the **Edit Dashboard** buttom in the top-right corner.
+
+#. Click on the 3 dot menu of the map item and select **Edit**.
+
 #. In the **Base Map** argument, choose ``Base Map`` from the **Variable Inputs**
    section at the bottom of the dropdown. The value becomes ``${Base Map}``.
 
-See
-`Referencing a variable input <getting_started_en.rst#referencing-a-variable-input>`_
-for the two forms this reference can take.
+   See
+   `Referencing a variable input <getting_started_en.rst#referencing-a-variable-input>`_
+   for the two forms this reference can take.
 
-
-Step 7 — Set the extent and fill the viewport
-=============================================
-
-#. Still editing the map, pan and zoom the preview until Guatemala City fills
-   the frame.
-#. In **Map Extent**, choose **Use the Previewed Map Extent** to freeze what you
-   are looking at. To match the shipped solution exactly, instead choose
-   **Use a Custom Extent** and enter:
+#. In **Map Extent** argument, choose **Use a Custom Extent** and enter:
 
    .. code-block:: text
 
       -10078437.52,1629645.07,15
 
    That is ``centre-x,centre-y,zoom`` in EPSG:3857 metres.
+
 #. On the **Settings** tab, turn on **Fill Viewport** so the map occupies the
    whole window.
-#. Save the item, then save the dashboard.
+
+#. Save the item by clicking **Save** in the bottom-right corner of the map editor.
+
+#. Save the dashboard by clicking **Save Changes** in the top-right corner of the dashboard editor.
 
 .. figure:: images/ex1-settings-fill-viewport.png
    :alt: The Settings tab with Fill Viewport enabled
@@ -278,8 +323,8 @@ Checkpoint
 You should now have:
 
 * A map filling the window, showing Guatemala City.
-* A layer control listing five layers; toggling each changes what is drawn.
-* A colour bar for depth, and one for probability.
+* A layer control listing six layers (including the base map); toggling each changes what is drawn.
+* A legend control with a colour bar for depth, and one for probability.
 * A base-map dropdown top-left that changes the imagery underneath.
 * Depth visible through to the probability layers beneath it, thanks to the
   0.5 opacity.
@@ -305,45 +350,6 @@ Talking points
 * **The projection constraint.** All five rasters are EPSG:3857 copies. See the
   warning in `The data <getting_started_en.rst#the-data>`_ — this comes up again
   in exercise 3, where getting it wrong makes layers appear and then vanish.
-
-
-Item positions
-==============
-
-The grid is 100 columns wide. Positions are ``x``, ``y`` (top-left) and ``w``,
-``h`` (size in grid units). Match approximately; these are for reference, not
-transcription.
-
-.. list-table::
-   :header-rows: 1
-   :widths: 46 14 14 13 13
-
-   * - Item
-     - x
-     - y
-     - w
-     - h
-   * - Map (**Fill Viewport**)
-     - 0
-     - 0
-     - 99
-     - 41
-   * - Variable Input — Base Map
-     - 0
-     - 0
-     - 15
-     - 5
-
-
-Notes on the shipped JSON
-=========================
-
-One small discrepancy you may notice when comparing this guide against
-``dashboards/Guatemala_Hands_On_1_English.json``. It does not affect behaviour;
-it is recorded so it does not read as a mistake in your own work.
-
-* **The 30 cm probability layer has** ``rampMin`` **of** ``"00"`` **rather than**
-  ``"0"``. A typing artifact from the GUI. It parses to zero identically.
 
 
 Next
