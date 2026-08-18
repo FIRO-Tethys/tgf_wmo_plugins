@@ -10,20 +10,20 @@
     }
   ],
   "unrestrictedPlacement": true,
-  "image": "/media/tethysdash/app/13c2d2ae-c4c4-4651-a59f-c03721dbb2cc.png",
+  "image": "/media/tethysdash/app/818087b2-909a-4104-89de-e2693e59ca41.png",
   "owner": "admin",
   "notes": "",
   "tabs": [
     {
-      "id": 195,
+      "id": 202,
       "name": "Principal",
       "gridItems": [
         {
           "i": "1",
           "x": 0,
           "y": 0,
-          "w": 55,
-          "h": 47,
+          "w": 54,
+          "h": 38,
           "source": "Map",
           "args_string": {
             "baseMap": "${Mapa Base}",
@@ -301,7 +301,7 @@
         },
         {
           "i": "2",
-          "x": 43,
+          "x": 42,
           "y": 0,
           "w": 12,
           "h": 6,
@@ -334,10 +334,10 @@
         },
         {
           "i": "3",
-          "x": 55,
-          "y": 27,
-          "w": 45,
-          "h": 16,
+          "x": 54,
+          "y": 23,
+          "w": 46,
+          "h": 13,
           "source": "wmo_storm_card_es",
           "args_string": {
             "index": "${Tormenta}"
@@ -363,8 +363,8 @@
         },
         {
           "i": "5",
-          "x": 55,
-          "y": 5,
+          "x": 54,
+          "y": 2,
           "w": 45,
           "h": 26,
           "source": "wmo_storm_impact_summary_es",

@@ -10,12 +10,12 @@
     }
   ],
   "unrestrictedPlacement": true,
-  "image": "/media/tethysdash/app/a677320c-36d3-4716-b3e5-5e2478bd6908.png",
+  "image": "/media/tethysdash/app/c24c23fd-f046-4cf9-a75e-e091b4686cc8.png",
   "owner": "admin",
   "notes": "",
   "tabs": [
     {
-      "id": 191,
+      "id": 200,
       "name": "Principal",
       "gridItems": [
         {
@@ -670,7 +670,7 @@
             "initial_value": "https://server.arcgisonline.com/arcgis/rest/services/World_Imagery/MapServer"
           },
           "metadata_string": {
-            "backgroundColor": "#9f9f9fb3"
+            "backgroundColor": "#ffffff"
           }
         }
       ]

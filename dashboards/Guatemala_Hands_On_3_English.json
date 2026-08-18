@@ -10,12 +10,12 @@
     }
   ],
   "unrestrictedPlacement": true,
-  "image": "/media/tethysdash/app/4c1ce969-bf4c-43de-99cf-33b17e912044.png",
+  "image": "/media/tethysdash/app/756cbca8-bc08-49ae-91a4-6a1e4e7b228c.png",
   "owner": "admin",
   "notes": "",
   "tabs": [
     {
-      "id": 197,
+      "id": 203,
       "name": "Main",
       "gridItems": [
         {
@@ -940,9 +940,9 @@
         {
           "i": "3",
           "x": 56,
-          "y": 8,
+          "y": 7,
           "w": 44,
-          "h": 26,
+          "h": 21,
           "source": "wmo_impact_summary_en",
           "args_string": {
             "umbral_bajo": "${Low Threshold (P(≥7.6 cm))}",
@@ -961,10 +961,10 @@
         },
         {
           "i": "4",
-          "x": 89,
+          "x": 88,
           "y": 0,
-          "w": 11,
-          "h": 8,
+          "w": 12,
+          "h": 7,
           "source": "Variable Input",
           "args_string": {
             "variable_name": "Severe Threshold (P(≥76 cm))",
@@ -1001,7 +1001,7 @@
           "x": 78,
           "y": 0,
           "w": 11,
-          "h": 8,
+          "h": 7,
           "source": "Variable Input",
           "args_string": {
             "variable_name": "High Threshold (P(≥30 cm))",
@@ -1034,10 +1034,10 @@
         },
         {
           "i": "6",
-          "x": 67,
+          "x": 66,
           "y": 0,
-          "w": 11,
-          "h": 8,
+          "w": 13,
+          "h": 7,
           "source": "Variable Input",
           "args_string": {
             "variable_name": "Medium Threshold (P(≥10 cm))",
@@ -1073,7 +1073,7 @@
           "x": 56,
           "y": 0,
           "w": 11,
-          "h": 8,
+          "h": 7,
           "source": "Variable Input",
           "args_string": {
             "variable_name": "Low Threshold (P(≥7.6 cm))",
