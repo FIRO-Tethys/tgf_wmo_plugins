@@ -95,7 +95,8 @@ Everything is read from a public S3 bucket; nothing is bundled.
 | `floodmaps_test/ensemble_stats.csv` | Precomputed per-storm summary |
 | `Guatemala_IBF/impact_features.geojson` | Buildings and roads with sampled probabilities |
 | `Guatemala_IBF/impact_features.csv` | The same rows without geometry, for tables |
-| `PBI_Actividad_2/prob_*.tif` | The four exceedance-probability rasters |
+| `PBI_Actividad_2/prob_*.tif` | The four exceedance-probability rasters, EPSG:3857 |
+| `PBI_Actividad_2/depth_m.tif` | Flood depth in metres, EPSG:3857, on the same grid |
 
 Two caveats that matter when reading the output:
 
@@ -105,6 +106,19 @@ Two caveats that matter when reading the output:
   unaffected — but the labels are not what they claim.
 - **The 76 cm layer only ever contains 0 or 0.2.** Any gate above 0.2 therefore
   makes the top hazard level unreachable, not merely rare.
+
+The dashboards deliberately use the `PBI_Actividad_2/` copies rather than the
+`Guatemala_IBF/` originals. The originals are EPSG:32615 (UTM 15N), and a UTM
+raster makes the map adopt that projection through the GeoTIFF auto-fit, which
+costs a reprojection on every tile. All five 3857 rasters share one grid exactly
+— 424×319, 5 m cells, identical origin — which is also the grid the RainyDay
+ensemble uses, so nothing is resampled at render time.
+
+`depth_m.tif` was resampled from the UTM original with nearest neighbour rather
+than bilinear: the layer is drawn with `mask_below: 0.01`, and averaging across
+the dry/wet boundary inflated the flooded footprint by 16% and clipped the peak
+depth. Nearest holds the footprint to 7,705 cells against the original's 7,710,
+the mean to 0.9281 m against 0.9289, and the maximum exactly.
 
 ## Site
 

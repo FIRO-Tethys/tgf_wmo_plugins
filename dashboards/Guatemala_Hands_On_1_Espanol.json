@@ -38,7 +38,7 @@
                     "source": {
                       "type": "GeoTIFF",
                       "props": {
-                        "url": "https://cog-s3-test-401506828094-us-east-1-an.s3.us-east-1.amazonaws.com/Guatemala_IBF/guatemala_flood_depth_clipped.tif",
+                        "url": "https://cog-s3-test-401506828094-us-east-1-an.s3.us-east-1.amazonaws.com/PBI_Actividad_2/depth_m.tif",
                         "mask_below": "0.01",
                         "normalize": true
                       },
@@ -149,7 +149,7 @@
                     "source": {
                       "type": "GeoTIFF",
                       "props": {
-                        "url": "https://cog-s3-test-401506828094-us-east-1-an.s3.us-east-1.amazonaws.com/Guatemala_IBF/guatemala_flood_76cm_probability_clipped.tif",
+                        "url": "https://cog-s3-test-401506828094-us-east-1-an.s3.us-east-1.amazonaws.com/PBI_Actividad_2/prob_76cm.tif",
                         "mask_below": "0",
                         "normalize": false
                       },
@@ -276,7 +276,7 @@
                     "source": {
                       "type": "GeoTIFF",
                       "props": {
-                        "url": "https://cog-s3-test-401506828094-us-east-1-an.s3.us-east-1.amazonaws.com/Guatemala_IBF/guatemala_flood_30cm_probability_clipped.tif",
+                        "url": "https://cog-s3-test-401506828094-us-east-1-an.s3.us-east-1.amazonaws.com/PBI_Actividad_2/prob_30cm.tif",
                         "mask_below": "0",
                         "normalize": false
                       },
@@ -402,7 +402,7 @@
                     "source": {
                       "type": "GeoTIFF",
                       "props": {
-                        "url": "https://cog-s3-test-401506828094-us-east-1-an.s3.us-east-1.amazonaws.com/Guatemala_IBF/guatemala_flood_10cm_probability_clipped.tif",
+                        "url": "https://cog-s3-test-401506828094-us-east-1-an.s3.us-east-1.amazonaws.com/PBI_Actividad_2/prob_10cm.tif",
                         "mask_below": "0",
                         "normalize": false
                       },
@@ -528,7 +528,7 @@
                     "source": {
                       "type": "GeoTIFF",
                       "props": {
-                        "url": "https://cog-s3-test-401506828094-us-east-1-an.s3.us-east-1.amazonaws.com/Guatemala_IBF/guatemala_flood_7p62_probability_clipped.tif",
+                        "url": "https://cog-s3-test-401506828094-us-east-1-an.s3.us-east-1.amazonaws.com/PBI_Actividad_2/prob_7p62.tif",
                         "mask_below": "0",
                         "normalize": false
                       },
