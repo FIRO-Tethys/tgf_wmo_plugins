@@ -7,10 +7,7 @@ Ejercicio 1 — Un mapa de profundidad y probabilidad de inundación
 
 Construcción de **Guatemala Práctica 1 (Español)**, paso a paso.
 
-**Empiece aquí** — Lea primero `Para Empezar <getting_started_es.rst>`_. Ahí se
-explica la instalación de los módulos, el bucket de datos y los pasos a los que
-esta guía se refiere: crear un tablero, entrar en modo de edición y agregar un
-elemento. Recuerde que la interfaz está en inglés, así que los nombres de botones
+Recuerde que la interfaz está en inglés, así que los nombres de botones
 y campos se dejan en inglés y en negrita.
 
 .. contents:: En esta página
