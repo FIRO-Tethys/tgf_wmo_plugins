@@ -198,9 +198,9 @@ For **each** of the four:
       * - ``variable_options_source``
         - ``number``
 
-#. On the **Settings** tab, set **Background Color** to ``#ffffff`` 
+#. On the **Settings** tab, set **Background Color** to ``#ffffff``.
 
-#. On the **Settings** tab, add a top border by clicking the top border icon. A popup will appear. Change the style to ``solid`` to show the border. 
+#. On the **Settings** tab, add a top border by clicking the top border icon. A popup will appear. Change the style to ``solid`` to show the border.
 
    Give the leftmost input (``Low Threshold``) a left border and the rightmost (``Severe Threshold``) a right
    border as well, so the four read as one strip.
@@ -227,25 +227,25 @@ For **each** of the four:
 
 Step 4 — Add the map and the five rasters
 =========================================
-If you have exercise 1 then do the following. If you do not have exercise 1, 
-build the map and the five rasters from scratch as in `Exercise 1 <exercise_1_en.rst>`_.: 
+If you have exercise 1 then do the following. If you do not have exercise 1,
+build the map and the five rasters from scratch as in `Exercise 1 <exercise_1_en.rst>`_.
 
 #. Open the dashboard from exercise 1
 
-#. Click on the map item's 3-dot menu, choose **Export**, 
+#. Click on the map item's 3-dot menu and choose **Export**.
 
-#. Open the new dashbord for this exercise.
+#. Open the new dashboard for this exercise.
 
 #. Click **Edit Dashboard** in the top-right corner to enter edit mode.
 
 #. Click the **Import Dashboard Item** in the top-right corner and import the
-   dashboard item from exercise 1. 
+   dashboard item from exercise 1.
 
-#. If the map is covering the storm selector and base map selector, click on 
-   the 3-dot menu, hove over **Order**, and select **Send to Back**. The 
+#. If the map is covering the storm selector and base map selector, click on
+   the 3-dot menu, hover over **Order**, and select **Send to Back**. The
    selectors should now be visible on top of the map.
 
-#. Edit the map item. For each of the five rasters, edit the layer and turn off the 
+#. Edit the map item. For each of the five rasters, edit the layer and turn off the
    **Default Visibility** in the **Layer** tab. This will hide the layers when the dashboard is first loaded.
    Make sure to save the layer after editing it.
 
@@ -382,7 +382,7 @@ Step 8 — Add the impact summary table
    :alt: The dashboard before and after lowering a threshold
    :width: 100%
 
-   **Screenshot:** the impact summary table argsuments bound to the four threshold variables.
+   **Screenshot:** the impact summary table arguments bound to the four threshold variables.
 
 
 Step 9 — Test the wiring
@@ -390,20 +390,20 @@ Step 9 — Test the wiring
 
 Update a threshold. The hazard shading, the affected features
 and the table should all recompute together, with progress messages while the
-layers rebuild. As a demonstration, lower the High threshold to 0.2. The purple Severe class
+layers rebuild. As a demonstration, lower the Severe threshold to 0.2. The purple Severe class
 expands to cover most of the stream, and the table shows more affected buildings and roads.
 
 .. figure:: images/ex3-thresholds-before.png
    :alt: The dashboard before lowering a threshold
    :width: 100%
 
-   **Screenshot:** the same view before lowering the Severe threshold,
+   **Screenshot:** the same view before lowering the Severe threshold.
 
 .. figure:: images/ex3-thresholds-after.png
    :alt: The dashboard after lowering a threshold
    :width: 100%
 
-   **Screenshot:** the same view after lowering the Severe threshold,
+   **Screenshot:** the same view after lowering the Severe threshold.
 
 
 Checkpoint

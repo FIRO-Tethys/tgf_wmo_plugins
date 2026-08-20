@@ -80,10 +80,10 @@ Step 2 — Add the storm selector
       * - ``variable_options_source``
         - ``Flood Maps (English): Storm Impact Summary (English) - Index``
 
-   That options source is generated from an existing plugin argument, in the 
-   form ``<group>: <plugin label> - <Argument>``. Picking it means 
-   "offer the same choices the Storm Impact Summary plugin's ``index`` argument 
-   offers", so the dropdown is populated from the plugin and cannot drift out of 
+   That options source is generated from an existing plugin argument, in the
+   form ``<group>: <plugin label> - <Argument>``. Picking it means
+   "offer the same choices the Storm Impact Summary plugin's ``index`` argument
+   offers", so the dropdown is populated from the plugin and cannot drift out of
    sync with it.
 
 #. On the **Settings** tab, set **Background Color** to ``#ffffff`` and add a
@@ -293,8 +293,8 @@ result.
 #. Resize the map item to fill the left half of the window by dragging the
    handle in its bottom-right corner.
 
-#. If the map is covering the storm selector and base map selector, click on 
-   the 3-dot menu, hove over **Order**, and select **Send to Back**. The 
+#. If the map is covering the storm selector and base map selector, click on
+   the 3-dot menu, hover over **Order**, and select **Send to Back**. The
    selectors should now be visible on top of the map.
 
 #. Save the dashboard by clicking **Save Changes** in the top-right corner of
