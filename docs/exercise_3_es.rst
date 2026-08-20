@@ -7,9 +7,7 @@ Ejercicio 3 — Clasificación de peligro con umbrales ajustables
 
 Construcción de **Guatemala Práctica 3 (Español)**, paso a paso.
 
-**Empiece aquí** — Este ejercicio reutiliza las cinco capas ráster del
-`Ejercicio 1 <exercise_1_es.rst>`_, así que construir ese primero le ahorrará
-tiempo. Recuerde que la interfaz está en inglés, así que los nombres de botones y
+Recuerde que la interfaz está en inglés, así que los nombres de botones y
 campos se dejan en inglés y en negrita.
 
 .. contents:: En esta página
