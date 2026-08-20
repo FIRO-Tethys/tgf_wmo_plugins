@@ -83,7 +83,7 @@ What you need
 
    .. code-block:: bash
 
-      pip install git+https://github.com/FIRO-Tethys/tgf_wmo_plugins.git
+      pip install git+https://github.com/Aquaveo/tgf_wmo_plugins.git
 
    Restart the Tethys app after installing. To confirm it worked, open any
    dashboard item's **Visualization Type** dropdown and look for the

@@ -94,7 +94,7 @@ Lo que necesita
 
    .. code-block:: bash
 
-      pip install git+https://github.com/FIRO-Tethys/tgf_wmo_plugins.git
+      pip install git+https://github.com/Aquaveo/tgf_wmo_plugins.git
 
    Reinicie la aplicación de Tethys después de instalar. Para confirmar que
    funcionó, abra el desplegable **Visualization Type** de cualquier elemento del
