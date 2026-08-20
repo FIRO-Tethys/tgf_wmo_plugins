@@ -7,9 +7,7 @@ Ejercicio 2 — Impacto de una sola tormenta
 
 Construcción de **Guatemala Práctica 2 (Español)**, paso a paso.
 
-**Empiece aquí** — Lea primero `Para Empezar <getting_started_es.rst>`_. Ahí se
-explica la instalación de los módulos, el bucket de datos y los pasos a los que
-esta guía se refiere. Recuerde que la interfaz está en inglés, así que los nombres
+Recuerde que la interfaz está en inglés, así que los nombres
 de botones y campos se dejan en inglés y en negrita.
 
 .. contents:: En esta página
