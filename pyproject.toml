@@ -16,7 +16,7 @@ dependencies = [
     "rasterio",
     "geopandas",
     "shapely",
-    "zarr>=3.0",
+    "zarr",
     "fsspec",
     "aiohttp",
 ]
