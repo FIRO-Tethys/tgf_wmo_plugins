@@ -48,7 +48,7 @@ Cada ejercicio construye un tablero de visualización y tiene su propio archivo:
 
 Los ejercicios son acumulativos en dificultad, no en contenido: cada uno es un
 tablero independiente y se puede construir por separado. El ejercicio 1 enseña las
-capas ráster, el 2 agrega una capa vectorial generada por un módulo (plugin) y un
+capas ráster, el 2 agrega una capa vectorial generada por un módulo y un
 selector alimentado por datos, y el 3 agrega interactividad mediante variables de
 entrada.
 
